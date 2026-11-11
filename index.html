@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
         tailwind.config = {
@@ -35,14 +35,9 @@
     </script>
     <style>
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-        }
-        .dark-glass {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
         }
         .hero-pattern {
             background-image: radial-gradient(rgba(249, 115, 22, 0.12) 1px, transparent 1px);
@@ -57,6 +52,9 @@
             cursor: pointer;
             box-shadow: 0 0 10px rgba(234, 88, 12, 0.4);
         }
+        .pdf-shadow {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-500 selection:text-white">
@@ -65,12 +63,12 @@
     <div class="bg-brand-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
             <div class="flex items-center space-x-2">
-                <span class="bg-brand-600 text-white font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Praxis-Tipp</span>
+                <span class="bg-brand-600 text-white font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Praxis-Beweis</span>
                 <span>Kein Systemwechsel nötig: TaktWerk ergänzt Ihr bestehendes ERP (Streit V.1, PDS, Taifun, Hero, Lexoffice u.v.m.)</span>
             </div>
-            <a href="#rechner" class="text-brand-500 hover:text-brand-400 font-semibold underline underline-offset-4 flex items-center space-x-1">
-                <span>Ersparnis für Ihren Betrieb berechnen</span>
-                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            <a href="#live-beweis" class="text-brand-500 hover:text-brand-400 font-semibold underline underline-offset-4 flex items-center space-x-1">
+                <span>Echten Vorher/Nachher-Regiebericht ansehen</span>
+                <i class="fa-solid fa-arrow-down text-[10px]"></i>
             </a>
         </div>
     </div>
@@ -88,18 +86,21 @@
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+            <nav class="hidden md:flex items-center space-x-7 text-sm font-semibold text-slate-600">
+                <a href="#live-beweis" class="text-brand-600 hover:text-brand-700 transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-brand-600 animate-ping"></span>
+                    <span>Live-Beispiel</span>
+                </a>
                 <a href="#alltag" class="hover:text-brand-600 transition">Das Problem</a>
-                <a href="#funktion" class="hover:text-brand-600 transition">So funktioniert's</a>
                 <a href="#erp-addon" class="hover:text-brand-600 transition">ERP-Schnittstelle</a>
                 <a href="#rechner" class="hover:text-brand-600 transition">Ersparnis-Rechner</a>
                 <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
             </nav>
 
             <div class="flex items-center space-x-3">
-                <a href="#demo" class="hidden sm:inline-flex items-center space-x-2 text-sm font-bold text-slate-700 hover:text-brand-600 px-3 py-2">
-                    <i class="fa-solid fa-play text-brand-600 text-xs"></i>
-                    <span>Live-Vorschau</span>
+                <a href="#live-beweis" class="hidden sm:inline-flex items-center space-x-2 text-sm font-bold text-slate-700 hover:text-brand-600 px-3 py-2">
+                    <i class="fa-solid fa-file-pdf text-brand-600 text-xs"></i>
+                    <span>Muster-PDF ansehen</span>
                 </a>
                 <a href="#kontakt" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-5 py-3 rounded-xl shadow-lg shadow-brand-600/25 transition text-sm flex items-center space-x-2">
                     <span>14 Tage gratis testen</span>
@@ -110,8 +111,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-14 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-brand-950 text-white hero-pattern">
-        <!-- Ambient Glow -->
+    <section class="relative pt-14 pb-20 lg:pt-20 lg:pb-28 overflow-hidden bg-brand-950 text-white hero-pattern">
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -126,132 +126,392 @@
                     </div>
 
                     <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
-                        Ihre Monteure sprechen einfach ins Handy. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-amber-400 to-brand-500">Die Rechnung ist schon vorbereitet.</span>
+                        Ihre Monteure sprechen einfach ins Handy. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-amber-400 to-brand-500">Nachträge, Material & PDF sind sofort fertig.</span>
                     </h1>
 
                     <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                        Schluss mit unleserlichen Stundenzetteln, vergessenen Kleinmaterialien und abendlicher Büroarbeit. <strong class="text-white font-semibold">TaktWerk</strong> macht aus einer 20-Sekunden-Sprachnotiz (oder WhatsApp) einen rechtssicheren Regiebericht – direkt in Ihrer bestehenden Handwerkersoftware.
+                        Schluss mit unleserlichen Stundenzetteln, vergessenen Zusatzarbeiten („Weil ich schon mal da war…“) und abendlicher Büroarbeit. <strong class="text-white font-semibold">TaktWerk</strong> verwandelt Baustellen-Sprache in 2 Sekunden in einen druckreifen Regiebericht – direkt in Ihrer Handwerkersoftware.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#kontakt" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-brand-600/30 transition text-base flex items-center justify-center space-x-3">
-                            <span>Unverbindliche Demo anfordern</span>
-                            <i class="fa-solid fa-arrow-right"></i>
+                        <a href="#live-beweis" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-brand-600/30 transition text-base flex items-center justify-center space-x-3">
+                            <span>Echtes Beispiel (Familie Müller) ansehen</span>
+                            <i class="fa-solid fa-arrow-down"></i>
                         </a>
-                        <a href="#alltag" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/15 font-semibold px-7 py-4 rounded-xl transition text-base flex items-center justify-center space-x-2">
-                            <span>Wie viel Zeit spart das?</span>
+                        <a href="#kontakt" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/15 font-semibold px-7 py-4 rounded-xl transition text-base flex items-center justify-center space-x-2">
+                            <span>Kostenlos im Betrieb testen</span>
                         </a>
                     </div>
 
                     <!-- Trust Metrics -->
                     <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-6 text-left max-w-xl mx-auto lg:mx-0">
                         <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-white">0 Min.</div>
+                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-white">100%</div>
+                            <div class="text-xs text-slate-400 mt-0.5">Erkannte Nachträge & Regiearbeiten</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-brand-500">0 Min.</div>
                             <div class="text-xs text-slate-400 mt-0.5">Schulungsaufwand für Monteure</div>
                         </div>
                         <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-brand-500">+18%</div>
-                            <div class="text-xs text-slate-400 mt-0.5">Mehr abgerechnetes Material</div>
-                        </div>
-                        <div>
-                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-emerald-400">100%</div>
-                            <div class="text-xs text-slate-400 mt-0.5">Kompatibel mit Ihrem ERP</div>
+                            <div class="font-display text-2xl sm:text-3xl font-extrabold text-emerald-400">Sofort</div>
+                            <div class="text-xs text-slate-400 mt-0.5">Nachbestell-Warnung fürs Lager</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column: Interactive Smartphone & Office Sync Mockup -->
-                <div class="lg:col-span-5" id="demo">
-                    <div class="relative mx-auto max-w-md">
-                        <!-- Floating Badge Top -->
-                        <div class="hidden sm:flex absolute -left-8 -top-6 z-20 bg-white text-slate-900 px-4 py-2.5 rounded-2xl shadow-2xl border border-slate-100 items-center space-x-3">
-                            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <!-- Right Column: Quick Teaser Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-900/95 rounded-3xl border border-slate-800 p-6 shadow-2xl space-y-5">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-microphone-lines text-lg"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-white block">Original Monteur-Sprachnotiz</span>
+                                    <span class="text-[11px] text-slate-400">Monteur: Kevin Schuster • 25 Sek.</span>
+                                </div>
                             </div>
-                            <div class="text-xs">
-                                <div class="font-bold">Per Web-Link oder WhatsApp</div>
-                                <div class="text-slate-500">Keine App-Installation nötig!</div>
+                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full text-[11px] font-semibold">
+                                Echt-Daten Demo
+                            </span>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800/90 text-xs text-slate-300 italic leading-relaxed">
+                            „Ja servus, also bei der <span class="text-white font-semibold underline decoration-brand-500">Müller in der Hauptstraße</span>, die zwei <span class="text-emerald-400 font-semibold">Eckventile unterm Waschtisch waren total vergammelt</span>, hab beide neu gemacht und nen neuen <span class="text-emerald-400 font-semibold">Flexschlauch</span> dran, <span class="text-emerald-400 font-semibold">Teflonband</span> auch. Hat so <span class="text-white font-semibold">zweieinhalb Stunden</span> gedauert. Der <span class="text-amber-400 font-semibold">Siphon ist auch durch, den hab ich aber nicht dabei</span>, muss ich nächste Woche nochmal hin. Ach ja, und weil ich schon da war, wollte sie noch, dass ich im <span class="text-sky-400 font-semibold">Gäste-WC den Spülkasten mach, hab das Füllventil getauscht, zwanzig Minuten</span>.“
+                        </div>
+
+                        <div class="space-y-2 text-xs">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Was TaktWerk in 2 Sekunden daraus erkennt:</div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-amber-500/10 border border-amber-500/30 text-amber-300 p-2.5 rounded-xl flex items-center gap-2">
+                                    <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+                                    <span><strong>Bestell-Alarm:</strong> 1x Siphon DN 40</span>
+                                </div>
+                                <div class="bg-sky-500/10 border border-sky-500/30 text-sky-300 p-2.5 rounded-xl flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-plus text-sky-400"></i>
+                                    <span><strong>Nachtrag:</strong> +20 Min. Gäste-WC</span>
+                                </div>
+                                <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-2.5 rounded-xl flex items-center gap-2">
+                                    <i class="fa-solid fa-boxes-stacked text-emerald-400"></i>
+                                    <span><strong>4 Materialien</strong> sauber gelistet</span>
+                                </div>
+                                <div class="bg-purple-500/10 border border-purple-500/30 text-purple-300 p-2.5 rounded-xl flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf text-purple-400"></i>
+                                    <span><strong>Kunden-PDF</strong> unterschriftsreif</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Main App Frame -->
-                        <div class="bg-slate-900 rounded-[2rem] border-4 border-slate-800 shadow-2xl overflow-hidden">
-                            <!-- Phone Top Bar -->
-                            <div class="bg-slate-950 px-6 py-3 flex items-center justify-between text-xs text-slate-400 border-b border-slate-800">
-                                <span class="font-semibold text-white">15:42</span>
-                                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded-full text-[11px] font-medium flex items-center gap-1.5">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Baustelle verbunden
-                                </span>
-                                <div class="flex items-center space-x-1.5">
-                                    <i class="fa-solid fa-signal"></i>
-                                    <i class="fa-solid fa-battery-full"></i>
-                                </div>
-                            </div>
+                        <a href="#live-beweis" class="block w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl text-xs transition border border-slate-700">
+                            Unten das komplette Büro-Ergebnis & PDF ansehen ↓
+                        </a>
+                    </div>
+                </div>
 
-                            <div class="p-6 space-y-5">
-                                <!-- Step 1: Monteur Input -->
-                                <div class="bg-slate-800/90 rounded-2xl p-4 border border-slate-700/70 space-y-2.5">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs font-bold text-brand-400 uppercase tracking-wider flex items-center gap-1.5">
-                                            <i class="fa-solid fa-microphone-lines"></i> 1. Monteur spricht ein (22 Sek.)
-                                        </span>
-                                        <span class="text-[11px] text-slate-400">Ali Demir</span>
-                                    </div>
-                                    <p class="text-xs text-slate-200 italic leading-relaxed bg-slate-900/70 p-3 rounded-xl border border-slate-800">
-                                        „Wartung bei Familie Kröger erledigt. Zweieinhalb Stunden gebraucht. Haben zwei Eckventile 1/2 Zoll und eine Dichtung getauscht. Im Keller tropft noch das Sicherheitsventil, hab ein Foto gemacht, müssen wir nächste Woche nochmal ran.“
-                                    </p>
-                                </div>
+            </div>
+        </div>
+    </section>
 
-                                <!-- Step 2: AI Conversion Indicator -->
-                                <div class="flex items-center justify-center">
-                                    <div class="bg-brand-500/15 border border-brand-500/30 text-brand-300 px-4 py-1.5 rounded-full text-xs font-semibold flex items-center space-x-2">
-                                        <i class="fa-solid fa-wand-magic-sparkles text-brand-400"></i>
-                                        <span>TaktWerk strukturiert & prüft Positionen</span>
-                                    </div>
-                                </div>
+    <!-- NEW HIGHLIGHT SECTION: Live-Beweis (Exact Replica of User Screenshot + PDF) -->
+    <section id="live-beweis" class="py-24 bg-slate-900 text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <span class="text-brand-400 font-bold text-xs uppercase tracking-widest bg-brand-500/10 border border-brand-500/20 px-4 py-1.5 rounded-full">
+                    Der 1:1 Praxis-Beweis (Kein Marketing-Blabla)
+                </span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    Vom echten Baustellen-O-Ton zum druckreifen Regiebericht
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Sehen Sie hier exakt, wie TaktWerk die eingesprochene Sprachnotiz von Monteur <strong>Kevin Schuster</strong> verarbeitet. Schalten Sie um zwischen der <strong>Büro-Ansicht</strong> und dem automatisch erzeugten <strong>Kunden-PDF</strong>:
+                </p>
 
-                                <!-- Step 3: Clean Output + Customer Signature -->
-                                <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg space-y-3">
-                                    <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-                                        <div>
-                                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Fertiger Regiebericht</span>
-                                            <h4 class="font-bold text-sm mt-1">Kunde: Familie Kröger</h4>
-                                        </div>
-                                        <i class="fa-solid fa-file-shield text-slate-400 text-lg"></i>
-                                    </div>
+                <!-- Interactive View Switcher Buttons -->
+                <div class="pt-4 inline-flex p-1.5 bg-slate-950 rounded-2xl border border-slate-800 gap-2">
+                    <button id="btnViewOffice" onclick="switchProofTab('office')" class="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-brand-600 text-white shadow-lg">
+                        <i class="fa-solid fa-desktop"></i>
+                        <span>1. Ansicht im Büro-Dashboard</span>
+                    </button>
+                    <button id="btnViewPdf" onclick="switchProofTab('pdf')" class="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>2. Fertiges Kunden-PDF (Regiebericht)</span>
+                    </button>
+                </div>
+            </div>
 
-                                    <div class="text-xs space-y-1.5 text-slate-700">
-                                        <div class="flex justify-between">
-                                            <span>• Arbeitszeit Monteur:</span>
-                                            <span class="font-bold text-slate-900">2,50 Std.</span>
-                                        </div>
-                                        <div class="flex justify-between">
-                                            <span>• Eckventil 1/2" (Art.-Nr. 4092):</span>
-                                            <span class="font-bold text-slate-900">2 Stk.</span>
-                                        </div>
-                                        <div class="flex justify-between">
-                                            <span>• Dichtungssatz Standard:</span>
-                                            <span class="font-bold text-slate-900">1 Stk.</span>
-                                        </div>
-                                        <div class="pt-1 text-[11px] text-amber-700 bg-amber-50 p-2 rounded-lg border border-amber-200">
-                                            <strong>Folgeauftrag automatisch angelegt:</strong> Sicherheitsventil Keller tauschen (+ 1 Foto angehängt)
-                                        </div>
-                                    </div>
+            <!-- Main Interactive Showcase Container -->
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
 
-                                    <!-- Signature Box -->
-                                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-                                        <div>
-                                            <span class="text-[10px] text-slate-400 block">Kunden-Abnahme vor Ort:</span>
-                                            <span class="font-serif italic text-base text-slate-800 tracking-wide">M. Kröger ✓</span>
-                                        </div>
-                                        <span class="bg-slate-900 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">
-                                            Im Büro verbucht
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Left 4 Cols: Original Monteur Input + Key Money-Savers -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-400 flex items-center gap-2">
+                                <i class="fa-solid fa-microphone"></i> Was der Monteur sagt:
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-400">11.11.2026, 08:17</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 italic leading-relaxed bg-slate-900 p-4 rounded-2xl border border-slate-800/80">
+                            „Ja servus, also bei der Müller in der Hauptstraße, die zwei Eckventile unterm Waschtisch waren total vergammelt, hab beide neu gemacht und nen neuen Flexschlauch dran, Teflonband auch. Hat so zweieinhalb Stunden gedauert. Der Siphon ist auch durch, den hab ich aber nicht dabei, muss ich nächste Woche nochmal hin. Ach ja, und weil ich schon da war, wollte sie noch, dass ich im Gäste-WC den Spülkasten mach, der lief dauernd nach, hab das Füllventil getauscht, zwanzig Minuten.“
+                        </p>
+                        <div class="text-[11px] text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-400"></i>
+                            <span>Keine Tipparbeit. Einfach auf dem Weg zum Transporter eingesprochen.</span>
                         </div>
                     </div>
+
+                    <!-- Why this makes money box -->
+                    <div class="bg-slate-800/50 border border-slate-700/70 rounded-3xl p-6 space-y-4">
+                        <h3 class="font-display font-bold text-base text-white">Warum dieses Beispiel bares Geld wert ist:</h3>
+                        <ul class="space-y-3 text-xs text-slate-300">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0 font-bold mt-0.5">1</span>
+                                <div>
+                                    <strong class="text-white block">Nachtrag gerettet (+20 Min. + Füllventil):</strong>
+                                    Im normalen Alltag wird „Hab noch kurz den Spülkasten gemacht“ auf dem Stundenzettel vergessen. TaktWerk macht daraus automatisch einen eigenen <strong>Nachtrags-Block</strong> zur Kundenunterschrift!
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0 font-bold mt-0.5">2</span>
+                                <div>
+                                    <strong class="text-white block">Sofortiger Bestell-Hinweis im Büro:</strong>
+                                    Der fehlende <em>Siphon DN 40</em> blitzt im Büro sofort gelb als Nachbestell-Aufgabe auf – nicht erst, wenn der Monteur nächste Woche wieder ohne Teil vor der Tür steht.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 font-bold mt-0.5">3</span>
+                                <div>
+                                    <strong class="text-white block">Aus „total vergammelt“ wird Fachsprache:</strong>
+                                    TaktWerk übersetzt Baustellen-Slang vollautomatisch in seriöses Handwerker-Deutsch (<em>„korrodierte Eckventile ausgebaut und ersetzt“</em>).
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right 8 Cols: TAB 1 (Office Dark Mode Card Replica) & TAB 2 (A4 PDF Replica) -->
+                <div class="lg:col-span-8">
+                    
+                    <!-- TAB 1: OFFICE UI REPLICA (Exact match to image_222953.png) -->
+                    <div id="tabContentOffice" class="bg-[#0f131a] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 font-sans">
+                        
+                        <!-- Top Header Row -->
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center space-x-2 text-xs">
+                                <i class="fa-regular fa-comment-dots text-slate-400"></i>
+                                <span class="font-bold text-white">Kevin Schuster</span>
+                                <span class="text-slate-400">11.11.2026, 08:17</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-[#d1fae5] text-[#065f46] text-xs font-bold px-3 py-1 rounded-full">Zugeordnet</span>
+                                <button onclick="switchProofTab('pdf')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold px-3 py-1 rounded-lg flex items-center space-x-1.5 transition">
+                                    <i class="fa-regular fa-file-pdf"></i>
+                                    <span>PDF ansehen</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Assignment Title -->
+                        <div class="text-sm font-bold text-slate-100">
+                            Familie Müller – Badsanierung – Armaturen tauschen
+                        </div>
+
+                        <!-- Yellow Warning Box: Fehlendes Material -->
+                        <div class="bg-[#fefce8] border border-[#fde047] text-[#713f12] rounded-xl p-4 text-xs sm:text-sm space-y-1">
+                            <div class="font-bold flex items-center space-x-2 text-[#854d0e]">
+                                <i class="fa-solid fa-triangle-exclamation text-[#d97706]"></i>
+                                <span>Fehlendes Material – nachbestellen</span>
+                            </div>
+                            <ul class="list-disc list-inside pl-5 font-medium text-[#713f12]">
+                                <li>1x Siphon DN 40 (Waschtisch)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Clean AI Generated Report Text -->
+                        <p class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                            Wir haben die beiden korrodierten Eckventile unter dem Waschtisch ausgebaut und durch neue Eckventile ersetzt. Zusätzlich wurde ein neuer Flexschlauch montiert und alle Verbindungen fachgerecht abgedichtet. Der Siphon am Waschtisch ist ebenfalls verschlissen und muss ausgetauscht werden; hierfür ist ein weiterer Termin erforderlich.
+                        </p>
+
+                        <!-- Light Blue Box: Nachtrag -->
+                        <div class="bg-[#f0f9ff] border border-[#7dd3fc] text-[#0c4a6e] rounded-xl p-4 text-xs sm:text-sm space-y-2">
+                            <div class="font-bold flex items-center space-x-2 text-[#0369a1]">
+                                <i class="fa-solid fa-circle-plus"></i>
+                                <span>Zusätzlich vor Ort beauftragte Leistungen (Nachtrag)</span>
+                            </div>
+                            <p class="text-[#0c4a6e]">
+                                Auf Wunsch des Auftraggebers zusätzlich im Gäste-WC das defekte Füllventil des Spülkastens ausgetauscht (Spülkasten lief ständig nach). Zeitaufwand ca. 20 Minuten.
+                            </p>
+                            <div class="text-[11px] text-[#0284c7]">
+                                Wird dem Kunden bei der Unterschrift angezeigt.
+                            </div>
+                        </div>
+
+                        <!-- KI-Hinweis & Time/Status Row -->
+                        <div class="space-y-3 pt-1">
+                            <div class="text-xs text-slate-400">
+                                KI-Hinweis Kunde/Ort: „Müller Hauptstraße“
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs sm:text-sm">
+                                <span class="text-slate-200 font-semibold flex items-center gap-1.5">
+                                    <i class="fa-regular fa-clock text-slate-400"></i> 2 h 30 min
+                                </span>
+                                <span class="text-[#f59e0b] font-bold">Nacharbeit nötig</span>
+                            </div>
+                        </div>
+
+                        <!-- Material List -->
+                        <div class="space-y-2 pt-2">
+                            <h4 class="text-xs sm:text-sm font-bold text-white">Material verbaut</h4>
+                            <ul class="list-disc list-inside text-xs sm:text-sm text-slate-300 space-y-1 pl-1">
+                                <li>2 Stk Eckventil 1/2 Zoll</li>
+                                <li>1 Stk Flexschlauch</li>
+                                <li>1 Rolle Teflonband</li>
+                                <li>1 Stk Füllventil Spülkasten</li>
+                            </ul>
+                        </div>
+
+                        <!-- Collapsible Original Transcript Box -->
+                        <div class="pt-3">
+                            <div class="bg-[#161b24] border border-slate-800 rounded-xl p-4 space-y-2">
+                                <div class="text-xs font-semibold text-slate-300 flex items-center gap-1.5 border border-slate-700/80 rounded px-2.5 py-1.5 bg-slate-900/60">
+                                    <i class="fa-solid fa-caret-down text-[10px]"></i>
+                                    <span>Original-Transkript</span>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                                    Ja servus, also bei der Müller in der Hauptstraße, die zwei Eckventile unterm Waschtisch waren total vergammelt, hab beide neu gemacht und nen neuen Flexschlauch dran, Teflonband auch. Hat so zweieinhalb Stunden gedauert. Der Siphon ist auch durch, den hab ich aber nicht dabei, muss ich nächste Woche nochmal hin. Ach ja, und weil ich schon da war, wollte sie noch, dass ich im Gäste-WC den Spülkasten mach, der lief dauernd nach, hab das Füllventil getauscht, zwanzig Minuten.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 2: A4 PDF DOCUMENT REPLICA (Exact match to Regiebericht_A-2026-0815_Familie_Müller.pdf) -->
+                    <div id="tabContentPdf" class="hidden bg-white text-slate-900 rounded-2xl p-6 sm:p-10 pdf-shadow font-sans space-y-6">
+                        
+                        <!-- Document Header -->
+                        <div class="flex flex-col sm:flex-row justify-between items-start border-b-2 border-slate-900 pb-6 gap-4">
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">Muster Haustechnik GmbH (Demo)</h3>
+                                <p class="text-xs text-slate-600 font-medium">Sanitär · Heizung · Solar</p>
+                                <p class="text-xs text-slate-500 mt-2">
+                                    Werkstattweg 5 · 80335 München<br>
+                                    Tel. +49 89 9876543 · info@muster-haustechnik.example<br>
+                                    www.muster-haustechnik.example
+                                </p>
+                            </div>
+                            <div class="sm:text-right">
+                                <div class="inline-block bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">Regiebericht</div>
+                                <div class="text-xs text-slate-700 font-semibold">Nr. 26365E89 · 11.11.2026</div>
+                                <div class="text-xs text-slate-500 mt-1">Ihre Auftrags-/Kommissions-Nr.: <strong>A-2026-0815</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Meta Grid: Auftraggeber / Baustelle / Ausführung -->
+                        <div class="grid sm:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Auftraggeber</span>
+                                <strong class="text-slate-900 block mt-0.5">Familie Müller</strong>
+                                <span class="text-slate-600">Hauptstraße 12, 80331 München</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Baustelle / Auftrag</span>
+                                <strong class="text-slate-900 block mt-0.5">Badsanierung - Armaturen tauschen</strong>
+                                <span class="text-slate-600">Hauptstraße 12, 80331 München</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Ausführung</span>
+                                <strong class="text-slate-900 block mt-0.5">Monteur: Kevin Schuster</strong>
+                                <span class="text-slate-600">Arbeitszeit: <strong>2:30 Std. (150 Min.)</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Ausgeführte Arbeiten -->
+                        <div class="space-y-1.5">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Ausgeführte Arbeiten</h4>
+                            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed bg-white border border-slate-200 rounded-xl p-3.5">
+                                Wir haben die beiden korrodierten Eckventile unter dem Waschtisch ausgebaut und durch neue Eckventile ersetzt. Zusätzlich wurde ein neuer Flexschlauch montiert und alle Verbindungen fachgerecht abgedichtet. Der Siphon am Waschtisch ist ebenfalls verschlissen und muss ausgetauscht werden; hierfür ist ein weiterer Termin erforderlich.
+                            </p>
+                        </div>
+
+                        <!-- Verbautes Material Table -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Verbautes Material</h4>
+                            <div class="overflow-hidden border border-slate-200 rounded-xl">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                            <th class="py-2.5 px-3 font-bold w-12">Pos.</th>
+                                            <th class="py-2.5 px-3 font-bold">Bezeichnung</th>
+                                            <th class="py-2.5 px-3 font-bold text-right w-20">Menge</th>
+                                            <th class="py-2.5 px-3 font-bold w-20">Einheit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200 text-slate-800">
+                                        <tr>
+                                            <td class="py-2 px-3 font-mono text-slate-500">1</td>
+                                            <td class="py-2 px-3 font-medium">Eckventil 1/2 Zoll</td>
+                                            <td class="py-2 px-3 text-right font-bold">2</td>
+                                            <td class="py-2 px-3">Stk</td>
+                                        </tr>
+                                        <tr class="bg-slate-50/60">
+                                            <td class="py-2 px-3 font-mono text-slate-500">2</td>
+                                            <td class="py-2 px-3 font-medium">Flexschlauch</td>
+                                            <td class="py-2 px-3 text-right font-bold">1</td>
+                                            <td class="py-2 px-3">Stk</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-mono text-slate-500">3</td>
+                                            <td class="py-2 px-3 font-medium">Teflonband</td>
+                                            <td class="py-2 px-3 text-right font-bold">1</td>
+                                            <td class="py-2 px-3">Rolle</td>
+                                        </tr>
+                                        <tr class="bg-slate-50/60">
+                                            <td class="py-2 px-3 font-mono text-slate-500">4</td>
+                                            <td class="py-2 px-3 font-medium">Füllventil Spülkasten</td>
+                                            <td class="py-2 px-3 text-right font-bold">1</td>
+                                            <td class="py-2 px-3">Stk</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Zusätzlich vor Ort beauftragte Leistungen (Nachtrag) -->
+                        <div class="bg-sky-50 border border-sky-200 rounded-xl p-4 space-y-1 text-xs">
+                            <div class="font-bold text-sky-900">Zusätzlich vor Ort beauftragte Leistungen (Nachtrag):</div>
+                            <p class="text-sky-800">
+                                Auf Wunsch des Auftraggebers zusätzlich im Gäste-WC das defekte Füllventil des Spülkastens ausgetauscht (Spülkasten lief ständig nach). Zeitaufwand ca. 20 Minuten.
+                            </p>
+                        </div>
+
+                        <!-- Offene Punkte -->
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 space-y-1 text-xs">
+                            <div class="font-bold text-amber-900">Offene Punkte – Ein weiterer Termin zur Fertigstellung ist erforderlich:</div>
+                            <ul class="list-disc list-inside text-amber-800 font-medium">
+                                <li>Noch zu liefern / nachzubestellen: 1x Siphon DN 40 (Waschtisch)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Signatures Footer -->
+                        <div class="grid sm:grid-cols-2 gap-6 pt-4 border-t border-slate-200 text-xs">
+                            <div class="border-t border-slate-400 pt-2 text-slate-600">
+                                Datum, Unterschrift Auftragnehmer (Muster Haustechnik GmbH)
+                            </div>
+                            <div class="border-t border-slate-400 pt-2 text-slate-600 flex items-center justify-between">
+                                <span>Datum, Unterschrift Auftraggeber</span>
+                                <span class="text-[11px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Digital vor Ort signierbar</span>
+                            </div>
+                        </div>
+
+                        <div class="text-[10px] text-slate-400 flex justify-between pt-2 border-t border-slate-100">
+                            <span>Regiebericht Nr. 26365E89 – Ihre Nr. A-2026-0815 – Familie Müller</span>
+                            <span>Seite 1 von 1</span>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -299,13 +559,13 @@
                         </div>
                         <h3 class="font-display text-lg font-bold text-slate-900 mb-3">„Kleinmaterial und Zusatzarbeiten schenken wir dem Kunden fast immer.“</h3>
                         <p class="text-slate-600 text-sm leading-relaxed mb-6">
-                            „Hier noch zwei Schellen aus dem Bulli geholt, da noch 20 Minuten länger wegen einem verrosteten Ventil gebraucht. Wird nicht aufgeschrieben, steht auf keiner Rechnung. Aufs Jahr gerechnet verschenken wir einen kompletten Jahresgewinn.“
+                            „Wie beim Beispiel oben: ‚Weil ich schon da war, hab ich noch kurz das Füllventil im Gäste-WC getauscht.‘ Steht auf keinem Zettel, wird nie berechnet. Aufs Jahr gerechnet verschenken wir damit einen kompletten Jahresgewinn.“
                         </p>
                     </div>
                     <div class="pt-4 border-t border-slate-200/80 flex items-center justify-between">
                         <div>
-                            <div class="font-bold text-xs text-slate-900">Elektroinstallation (12 Mitarbeiter)</div>
-                            <div class="text-[11px] text-red-600 font-semibold mt-0.5"><i class="fa-solid fa-circle-xmark mr-1"></i> Ø 350 € vergessenes Material pro Monteur/Monat</div>
+                            <div class="font-bold text-xs text-slate-900">Elektro & Sanitär (12 Mitarbeiter)</div>
+                            <div class="text-[11px] text-red-600 font-semibold mt-0.5"><i class="fa-solid fa-circle-xmark mr-1"></i> Ø 350 € vergessene Nachträge pro Monteur/Monat</div>
                         </div>
                     </div>
                 </div>
@@ -332,108 +592,8 @@
         </div>
     </section>
 
-    <!-- Solution Section: Warum Monteure TaktWerk lieben -->
-    <section id="funktion" class="py-24 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-brand-400 font-bold text-xs uppercase tracking-widest bg-brand-500/10 border border-brand-500/20 px-3.5 py-1.5 rounded-full">Die Antwort aus der Praxis</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-                        Gebaut für Handwerkerhände, nicht für Bürokraten.
-                    </h2>
-                    <p class="text-slate-300 text-base leading-relaxed">
-                        Wenn ein Werkzeug kompliziert ist, bleibt es im Koffer liegen. Deshalb funktioniert TaktWerk genau so, wie Ihre Mitarbeiter ohnehin kommunizieren: <strong class="text-white">Per Sprache, Foto und WhatsApp.</strong>
-                    </p>
-
-                    <div class="pt-4 space-y-4">
-                        <div class="flex items-start space-x-3.5">
-                            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <i class="fa-solid fa-check text-xs"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Versteht Dialekt, Baustellen-Jargon & mehrere Sprachen</h4>
-                                <p class="text-xs text-slate-400 mt-1">Egal ob Bairisch, Kölsch oder wenn der Monteur auf Polnisch, Türkisch oder Rumänisch einspricht: Im Büro landet ein perfekter deutscher Kundenbericht.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3.5">
-                            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <i class="fa-solid fa-check text-xs"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">QR-Code scannen oder direkt WhatsApp nutzen</h4>
-                                <p class="text-xs text-slate-400 mt-1">Kein Passwort-Vergessen, kein App-Store-Zwang. Entweder über die ultraleichte Monteur-Ansicht im Browser oder einfach als Sprachnachricht per WhatsApp.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-3.5">
-                            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <i class="fa-solid fa-check text-xs"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">Rechtssichere Unterschrift direkt auf dem Handy</h4>
-                                <p class="text-xs text-slate-400 mt-1">Keine Diskussionen mehr im Nachhinein („Der Monteur war doch nur 1 Stunde da!“). Der Kunde quittiert Zeit und Material sofort vor Ort.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 Step Visual Cards -->
-                <div class="lg:col-span-7 grid sm:grid-cols-3 gap-5">
-                    <div class="bg-slate-800/80 border border-slate-700/70 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-xl font-bold mb-5 shadow-lg shadow-brand-600/30">
-                                <i class="fa-solid fa-microphone"></i>
-                            </div>
-                            <span class="text-xs font-bold text-brand-400 uppercase">Schritt 1</span>
-                            <h3 class="font-display font-bold text-lg text-white mt-1 mb-2">Einsprechen & Knipsen</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                Auf dem Weg zum Bulli kurz antippen: Was wurde gemacht, wie lange hat es gedauert, welches Material wurde verbaut? Foto vom fertigen Werk dazu – fertig.
-                            </p>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-slate-700/70 text-[11px] text-slate-400 font-mono">
-                            Dauer: ~ 25 Sekunden
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800/80 border border-slate-700/70 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl font-bold mb-5 shadow-lg shadow-blue-600/30">
-                                <i class="fa-solid fa-signature"></i>
-                            </div>
-                            <span class="text-xs font-bold text-blue-400 uppercase">Schritt 2</span>
-                            <h3 class="font-display font-bold text-lg text-white mt-1 mb-2">Vor Ort abzeichnen</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                Die KI formuliert in 2 Sekunden einen sauberen Kundenbericht, trennt interne Notizen ab und lässt den Kunden direkt mit dem Finger unterschreiben.
-                            </p>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-slate-700/70 text-[11px] text-slate-400 font-mono">
-                            100% Nachweissicher
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-800/80 border border-slate-700/70 rounded-3xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl font-bold mb-5 shadow-lg shadow-emerald-600/30">
-                                <i class="fa-solid fa-file-invoice"></i>
-                            </div>
-                            <span class="text-xs font-bold text-emerald-400 uppercase">Schritt 3</span>
-                            <h3 class="font-display font-bold text-lg text-white mt-1 mb-2">Fertig im Büro-System</h3>
-                            <p class="text-xs text-slate-300 leading-relaxed">
-                                Noch bevor der Monteur vom Hof fährt, liegen Stunden, Artikelnummern, Fotos und das unterschriebene PDF fix und fertig zugeordnet im Büro.
-                            </p>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-slate-700/70 text-[11px] text-slate-400 font-mono">
-                            0 Min. Abtipparbeit
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- USP Section: Die Schnittstelle zu den großen Systemen (Der Kosten-Hebel) -->
-    <section id="erp-addon" class="py-24 bg-white">
+    <section id="erp-addon" class="py-24 bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">Der smarte Zusatz statt teurem Komplettwechsel</span>
@@ -461,7 +621,7 @@
                             </div>
                         </div>
                         <ul class="text-xs text-slate-300 space-y-2 pt-2">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> Sprachnotiz per Web-App oder WhatsApp</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> Sprachnotiz per Web-Link oder WhatsApp</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> Fotos von Baustelle, Typenschild & Belegen</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400"></i> Kundenunterschrift auf dem Handy</li>
                         </ul>
@@ -474,7 +634,7 @@
                         </div>
                         <div class="font-display font-extrabold text-lg">TaktWerk KI-Brücke</div>
                         <p class="text-xs text-slate-400 max-w-xs mx-auto">
-                            Übersetzt Sprache in exakte Leistungspositionen, Artikelnummern, Zeiten & PDF-Belege
+                            Übersetzt Sprache in exakte Leistungspositionen, Nachträge, Zeiten & PDF-Regieberichte
                         </p>
                         <div class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full inline-block">
                             IDS / GAEB / CSV / DATEV / REST-API
@@ -504,7 +664,7 @@
             </div>
 
             <!-- Comparison Table: Klassische ERP-Lizenzen vs. TaktWerk Zusatz -->
-            <div class="max-w-4xl mx-auto bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
                 <div class="p-6 sm:p-8 bg-slate-100/80 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <h3 class="font-display font-extrabold text-xl text-slate-900">Direkter Kostenvergleich (Beispiel: 10 Monteure)</h3>
@@ -516,7 +676,7 @@
                 </div>
 
                 <div class="divide-y divide-slate-200 text-sm">
-                    <div class="grid grid-cols-12 p-4 sm:px-8 font-bold text-slate-500 text-xs uppercase tracking-wider bg-white">
+                    <div class="grid grid-cols-12 p-4 sm:px-8 font-bold text-slate-500 text-xs uppercase tracking-wider bg-slate-50">
                         <div class="col-span-5">Kriterium</div>
                         <div class="col-span-4 text-center">Große ERP-Mobil-Lizenzen</div>
                         <div class="col-span-3 text-center text-brand-600">TaktWerk Add-on</div>
@@ -528,10 +688,10 @@
                         <div class="col-span-3 text-center font-bold text-emerald-600">Bruchteil der Kosten</div>
                     </div>
 
-                    <div class="grid grid-cols-12 p-4 sm:px-8 items-center bg-white">
-                        <div class="col-span-5 font-semibold text-slate-800">Einrichtung & Schulung</div>
-                        <div class="col-span-4 text-center text-slate-600">1.500 € – 4.000 € Dienstleistung</div>
-                        <div class="col-span-3 text-center font-bold text-emerald-600">0 € (In 15 Min. startklar)</div>
+                    <div class="grid grid-cols-12 p-4 sm:px-8 items-center bg-slate-50/50">
+                        <div class="col-span-5 font-semibold text-slate-800">Nachtrags- & Bestell-Erkennung</div>
+                        <div class="col-span-4 text-center text-slate-600">Muss manuell eingetippt werden</div>
+                        <div class="col-span-3 text-center font-bold text-emerald-600">Automatisch per KI</div>
                     </div>
 
                     <div class="grid grid-cols-12 p-4 sm:px-8 items-center">
@@ -540,8 +700,8 @@
                         <div class="col-span-3 text-center font-bold text-emerald-600">Einfach sprechen / WhatsApp</div>
                     </div>
 
-                    <div class="grid grid-cols-12 p-4 sm:px-8 items-center bg-white">
-                        <div class="col-span-5 font-semibold text-slate-800">Fremdsprachen-Übersetzung</div>
+                    <div class="grid grid-cols-12 p-4 sm:px-8 items-center bg-slate-50/50">
+                        <div class="col-span-5 font-semibold text-slate-800">Fremdsprachen & Dialekt</div>
                         <div class="col-span-4 text-center text-red-500"><i class="fa-solid fa-xmark"></i> Nicht vorhanden</div>
                         <div class="col-span-3 text-center font-bold text-emerald-600"><i class="fa-solid fa-check"></i> Automatisch inklusive</div>
                     </div>
@@ -551,7 +711,7 @@
     </section>
 
     <!-- Interactive ROI Calculator Section -->
-    <section id="rechner" class="py-24 bg-slate-100 border-y border-slate-200">
+    <section id="rechner" class="py-24 bg-white border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 
@@ -561,24 +721,24 @@
                         Rechnen Sie selbst: Was kostet Sie der Zettelkrieg aktuell?
                     </h2>
                     <p class="text-slate-600 text-base leading-relaxed">
-                        Schon 30 Minuten eingesparte Schreib- und Rückfragezeit pro Tag sowie ein einziges nicht vergessenes Ersatzteil pro Woche summieren sich auf enorme Beträge.
+                        Schon ein einziger nicht vergessener Nachtrag pro Woche (wie das Gäste-WC-Füllventil im Beispiel oben) und 30 Minuten eingesparte Schreibzeit pro Tag summieren sich auf enorme Beträge.
                     </p>
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 space-y-2 text-xs text-slate-600">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 space-y-2 text-xs text-slate-600">
                         <div class="font-bold text-slate-900 flex items-center gap-2">
                             <i class="fa-solid fa-bolt text-brand-500"></i> Sofortige Liquidität:
                         </div>
-                        <p>Weil der unterschriebene Bericht noch am selben Nachmittag im Büro vorliegt, gehen Rechnungen im Schnitt <strong>9 Tage früher</strong> an den Kunden raus.</p>
+                        <p>Weil der unterschriebene Regiebericht noch am selben Nachmittag im Büro vorliegt, gehen Rechnungen im Schnitt <strong>9 Tage früher</strong> an den Kunden raus.</p>
                     </div>
                 </div>
 
                 <!-- Calculator Box -->
-                <div class="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200/90 space-y-8">
+                <div class="lg:col-span-7 bg-slate-50 rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200/90 space-y-8">
                     <div class="space-y-6">
                         <!-- Slider 1: Monteure -->
                         <div>
                             <div class="flex justify-between items-center mb-2">
                                 <label class="text-sm font-bold text-slate-800">Anzahl Ihrer Monteure im Außendienst:</label>
-                                <span id="monteurVal" class="font-display text-xl font-extrabold text-brand-600 bg-brand-50 px-3 py-1 rounded-lg">6 Monteure</span>
+                                <span id="monteurVal" class="font-display text-xl font-extrabold text-brand-600 bg-brand-50 border border-brand-200 px-3 py-1 rounded-lg">6 Monteure</span>
                             </div>
                             <input id="monteurSlider" type="range" min="1" max="30" value="6" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateROI()">
                             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
@@ -592,7 +752,7 @@
                         <div>
                             <div class="flex justify-between items-center mb-2">
                                 <label class="text-sm font-bold text-slate-800">Durchschnittlicher Verrechnungssatz / Stunde:</label>
-                                <span id="rateVal" class="font-display text-xl font-extrabold text-slate-900 bg-slate-100 px-3 py-1 rounded-lg">68 € / Std.</span>
+                                <span id="rateVal" class="font-display text-xl font-extrabold text-slate-900 bg-white border border-slate-200 px-3 py-1 rounded-lg">68 € / Std.</span>
                             </div>
                             <input id="rateSlider" type="range" min="45" max="110" value="68" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" oninput="updateROI()">
                             <div class="flex justify-between text-[11px] text-slate-400 mt-1">
@@ -604,14 +764,14 @@
                     </div>
 
                     <!-- Results Grid -->
-                    <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/70">
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/70">
                             <span class="text-xs text-slate-500 font-medium">Eingesparte Dokumentations- & Bürozeit:</span>
                             <div id="hoursSaved" class="font-display text-2xl font-extrabold text-slate-900 mt-1">72 Std. / Monat</div>
                             <span class="text-[11px] text-emerald-600 font-semibold">≈ 3 Std. pro Monteur & Woche</span>
                         </div>
-                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/70">
-                            <span class="text-xs text-slate-500 font-medium">Zusätzlich erfasstes Kleinmaterial & Regiezeit:</span>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/70">
+                            <span class="text-xs text-slate-500 font-medium">Zusätzlich erfasste Nachträge & Kleinmaterial:</span>
                             <div id="materialSaved" class="font-display text-2xl font-extrabold text-slate-900 mt-1">+ 1.500 € / Monat</div>
                             <span class="text-[11px] text-emerald-600 font-semibold">Nicht mehr vergessene Positionen</span>
                         </div>
@@ -633,47 +793,47 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-white">
+    <section id="faq" class="py-24 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 space-y-3">
-                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full">Häufige Fragen von Betriebsinhabern</span>
+                <span class="text-brand-600 font-bold text-xs uppercase tracking-widest bg-brand-50 px-3.5 py-1.5 rounded-full border border-brand-200">Häufige Fragen von Betriebsinhabern</span>
                 <h2 class="font-display text-3xl font-extrabold text-slate-900">Klare Antworten – ohne Fachchinesisch</h2>
             </div>
 
             <div class="space-y-4">
-                <details class="group bg-slate-50 rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden" open>
+                <details class="group bg-white rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden" open>
                     <summary class="flex items-center justify-between cursor-pointer font-display font-bold text-base text-slate-900">
                         <span>Muss ich meine bisherige Handwerkersoftware dafür abschaffen?</span>
-                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
+                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </span>
                     </summary>
                     <p class="mt-4 text-sm text-slate-600 leading-relaxed">
-                        <strong>Nein, ganz im Gegenteil!</strong> TaktWerk ist bewusst als schlanker Aufsatz konzipiert. Sie behalten Ihr gewohntes Programm im Büro für Angebote und Buchhaltung. TaktWerk übernimmt lediglich die mobile Erfassung auf der Baustelle und liefert die fertigen Texte, Zeiten, Materialien und PDFs sauber an Ihr System.
+                        <strong>Nein, ganz im Gegenteil!</strong> TaktWerk ist bewusst als schlanker Aufsatz konzipiert. Sie behalten Ihr gewohntes Programm im Büro für Angebote und Buchhaltung. TaktWerk übernimmt lediglich die mobile Erfassung auf der Baustelle und liefert die fertigen Texte, Zeiten, Nachträge, Materialien und PDFs sauber an Ihr System.
                     </p>
                 </details>
 
-                <details class="group bg-slate-50 rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden">
+                <details class="group bg-white rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between cursor-pointer font-display font-bold text-base text-slate-900">
                         <span>Einige meiner Monteure sind über 55 oder sprechen kaum Deutsch – klappt das trotzdem?</span>
-                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
+                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </span>
                     </summary>
                     <p class="mt-4 text-sm text-slate-600 leading-relaxed">
-                        Ja – genau dafür wurde TaktWerk gebaut. Wer eine Sprachnachricht bei WhatsApp verschicken kann, kann auch TaktWerk bedienen. Und wenn ein Mitarbeiter auf Polnisch, Türkisch, Rumänisch oder im tiefsten Dialekt einspricht, übersetzt und formuliert das System daraus automatisch einen einwandfreien deutschen Arbeitsbericht für den Kunden.
+                        Ja – genau dafür wurde TaktWerk gebaut. Wer eine Sprachnachricht bei WhatsApp verschicken kann, kann auch TaktWerk bedienen. Und wenn ein Mitarbeiter auf Polnisch, Türkisch, Rumänisch oder im tiefsten Dialekt einspricht, übersetzt und formuliert das System daraus automatisch einen einwandfreien deutschen Regiebericht für den Kunden.
                     </p>
                 </details>
 
-                <details class="group bg-slate-50 rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden">
+                <details class="group bg-white rounded-2xl border border-slate-200/80 p-6 [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between cursor-pointer font-display font-bold text-base text-slate-900">
-                        <span>Was passiert im Keller im Funkloch ohne Internetempfang?</span>
-                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
+                        <span>Wie erkennt das System Nachträge und fehlendes Material so zuverlässig?</span>
+                        <span class="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 group-open:rotate-180 transition">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </span>
                     </summary>
                     <p class="mt-4 text-sm text-slate-600 leading-relaxed">
-                        Die mobile Ansicht speichert Eingaben, Fotos und Unterschriften im Offline-Puffer des Smartphones zwischen. Sobald der Monteur wieder aus dem Keller kommt und Empfang hat, synchronisiert sich alles automatisch im Hintergrund.
+                        Unsere Handwerks-KI ist speziell auf Baustellen-Dialoge trainiert. Sobald ein Monteur erwähnt, dass etwas nicht im Fahrzeug war („hab ich nicht dabei, muss ich nochmal hin“) oder der Kunde vor Ort einen Zusatzwunsch äußert („wollte noch, dass ich im Gäste-WC…“), hebt TaktWerk diese Punkte optisch im Büro hervor und weist den Nachtrag separat auf dem Abnahme-PDF aus.
                     </p>
                 </details>
             </div>
@@ -693,7 +853,7 @@
                         Testen Sie TaktWerk 14 Tage lang mit einem echten Monteur.
                     </h2>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Überzeugen Sie sich selbst davon, wie viel Ruhe in Ihren Feierabend einkehrt, wenn der erste fertige Bericht wie von Geisterhand im Büro aufpoppt.
+                        Überzeugen Sie sich selbst davon, wie viel Ruhe in Ihren Feierabend einkehrt, wenn der erste fertige Regiebericht inklusive Nachtrag und Materialliste wie von Geisterhand im Büro aufpoppt.
                     </p>
                     <ul class="space-y-2.5 text-xs text-slate-300">
                         <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> Persönliche Einrichtung in 15 Minuten per Telefon</li>
@@ -784,6 +944,25 @@
     </div>
 
     <script>
+        function switchProofTab(tab) {
+            const officeContent = document.getElementById('tabContentOffice');
+            const pdfContent = document.getElementById('tabContentPdf');
+            const btnOffice = document.getElementById('btnViewOffice');
+            const btnPdf = document.getElementById('btnViewPdf');
+
+            if (tab === 'office') {
+                officeContent.classList.remove('hidden');
+                pdfContent.classList.add('hidden');
+                btnOffice.className = 'px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-brand-600 text-white shadow-lg';
+                btnPdf.className = 'px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white';
+            } else {
+                officeContent.classList.add('hidden');
+                pdfContent.classList.remove('hidden');
+                btnPdf.className = 'px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-brand-600 text-white shadow-lg';
+                btnOffice.className = 'px-5 py-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white';
+            }
+        }
+
         function updateROI() {
             const monteure = parseInt(document.getElementById('monteurSlider').value);
             const rate = parseInt(document.getElementById('rateSlider').value);
