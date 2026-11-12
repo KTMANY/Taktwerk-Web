@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaktWerk – Baustellendokumentation per Sprache & WhatsApp für das Handwerk</title>
+    <meta name="description" content="TaktWerk wandelt Sprachnotizen und WhatsApp-Nachrichten Ihrer Monteure in strukturierte Regieberichte um – mit Standardleistungen, Material-Hinweisen, Kundenunterschrift und PDF-Export. Auch Angebote lassen sich per Sprache erstellen (Beta).">
+
+    <!-- ================================================================================
+         PLATZHALTER ZUM SPÄTEREN ERSETZEN (im <head> nicht per Skript möglich):
+         {{CANONICAL_URL}}  = endgültige Adresse dieser Seite, z. B. https://www.taktwerk.de/
+         {{OG_BILD_URL}}    = Link zu einem Vorschaubild (1200 × 630 px) für Social-Media-Vorschauen
+         Alle übrigen Angaben (Firma, Adresse, Preis, Demo-Link …) stehen im Block "SITE" ganz unten im Skript.
+         ================================================================================ -->
+    <link rel="canonical" href="{{CANONICAL_URL}}">
+
+    <!-- OpenGraph / Social Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TaktWerk – Schluss mit Zettelwirtschaft im Handwerk">
+    <meta property="og:description" content="Sprachnotizen und WhatsApp-Nachrichten in strukturierte Regieberichte, Materiallisten und PDF-Belege umwandeln – Angebote per Sprache (Beta).">
+    <meta property="og:url" content="{{CANONICAL_URL}}">
+    <meta property="og:image" content="{{OG_BILD_URL}}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Inline-SVG-Favicon (kein externer Request) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ea580c'/%3E%3Cpath d='M36 10L16 36h14l-2 18 20-26H34l2-18z' fill='%23ffffff'/%3E%3C/svg%3E">
+
+    <!-- Strukturierte Daten für Suchmaschinen (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "TaktWerk",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, WhatsApp",
+      "description": "Webbasierte Baustellendokumentation für Handwerksbetriebe: Sprachnotizen werden zu strukturierten Regieberichten und PDF-Belegen."
+    }
+    </script>
+
+    <!-- 100 % OHNE EXTERNE RESSOURCEN: kein Google Fonts, kein Icon-CDN, kein Tailwind-CDN, kein Tracking. -->
+    <style>
+        :root {
+            --bg-dark: #070a12;
+            --bg-card-dark: #0f1420;
+            --bg-light: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --brand: #ea580c;
+            --brand-hover: #c2410c;
+            --brand-light: #fff7ed;
+            --brand-border: #fed7aa;
+            --border-light: #e2e8f0;
+            --border-dark: #1e293b;
+            --radius-lg: 1.25rem;
+            --radius-xl: 1.5rem;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-family: var(--font-sans); color: var(--text-main); background: var(--bg-light); line-height: 1.5; }
+        body { overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+        button, input, select, textarea { font-family: inherit; }
+        :focus-visible { outline: 3px solid #fb923c; outline-offset: 2px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+        .badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.35rem 0.85rem; border-radius: 999px; }
+        .badge-brand { background: var(--brand-light); color: var(--brand); border: 1px solid var(--brand-border); }
+        .badge-dark { background: rgba(255,255,255,0.08); color: #fed7aa; border: 1px solid rgba(255,255,255,0.15); }
+        .beta { display: inline-block; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; vertical-align: middle; margin-left: 0.35rem; }
+
+        /* Markierung für noch nicht ersetzte Platzhalter (verschwindet automatisch, sobald der Wert gesetzt ist) */
+        .ph { background: #fde047; color: #713f12; border-radius: 3px; padding: 0 0.2rem; font-weight: 700; }
+
+        /* Top Bar */
+        .topbar { background: var(--bg-dark); color: #cbd5e1; font-size: 0.78rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border-dark); }
+        .topbar-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
+        .topbar-tag { background: var(--brand); color: #fff; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.68rem; text-transform: uppercase; margin-right: 0.5rem; }
+        .topbar a { color: #fb923c; font-weight: 600; text-decoration: underline; }
+
+        /* Header */
+        header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-light); }
+        .nav-inner { height: 4.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
+        .logo-icon { width: 2.6rem; height: 2.6rem; border-radius: 0.75rem; background: linear-gradient(135deg, #f97316, #c2410c); display: flex; align-items: center; justify-content: center; color: #fff; }
+        .logo-sub { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 600; margin-top: -0.2rem; }
+        .nav-links { display: none; gap: 1.5rem; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--brand); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 700; font-size: 0.9rem; padding: 0.75rem 1.35rem; border-radius: 0.75rem; border: none; cursor: pointer; transition: 0.15s ease; text-align: center; }
+        .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 8px 20px -4px rgba(234, 88, 12, 0.35); }
+        .btn-primary:hover { background: var(--brand-hover); }
+        .btn-primary:disabled { opacity: 0.6; cursor: wait; }
+        .btn-outline-light { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.12); }
+        @media (min-width: 980px) { .nav-links { display: flex; } }
+
+        /* Hero */
+        .hero { background: var(--bg-dark); color: #fff; padding: 4.5rem 0 5.5rem; position: relative; background-image: radial-gradient(rgba(249, 115, 22, 0.12) 1px, transparent 1px); background-size: 24px 24px; }
+        .hero-grid { display: grid; gap: 3rem; align-items: center; }
+        @media (min-width: 960px) { .hero-grid { grid-template-columns: 7fr 5fr; } }
+        .hero h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; margin: 1.25rem 0; }
+        .text-gradient { background: linear-gradient(90deg, #fb923c, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.1rem; color: #cbd5e1; max-width: 620px; margin-bottom: 1.75rem; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.25rem; }
+        .hero-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border-dark); max-width: 600px; }
+        .hero-fact-val { font-size: 1.15rem; font-weight: 800; color: #fff; }
+        .hero-fact-lbl { font-size: 0.75rem; color: #94a3b8; margin-top: 0.15rem; }
+
+        .teaser-card { background: var(--bg-card-dark); border: 1px solid var(--border-dark); border-radius: var(--radius-xl); padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .teaser-head { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-dark); margin-bottom: 1rem; }
+        .demo-pill { font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.3); white-space: nowrap; }
+        .quote-box { background: #070a12; border: 1px solid var(--border-dark); border-radius: 1rem; padding: 1rem; font-size: 0.82rem; color: #e2e8f0; font-style: italic; line-height: 1.6; margin-bottom: 1rem; }
+        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.75rem; margin-bottom: 1rem; }
+        .mini-item { padding: 0.6rem 0.75rem; border-radius: 0.65rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+
+        /* Sections */
+        section { padding: 5rem 0; }
+        .sec-head { text-align: center; max-width: 720px; margin: 0 auto 3.5rem; }
+        .sec-head h2 { font-size: clamp(1.75rem, 3.2vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0.85rem 0; }
+        .sec-head p { color: var(--text-muted); font-size: 1.05rem; }
+
+        .grid-3 { display: grid; gap: 1.75rem; }
+        @media (min-width: 860px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        .grid-3 + .grid-3 { margin-top: 1.75rem; }
+        .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-icon { width: 3rem; height: 3rem; border-radius: 0.85rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; font-weight: 800; font-size: 1.4rem; }
+        .card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.65rem; }
+        .card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+        .card-foot { padding-top: 1rem; border-top: 1px solid var(--border-light); font-size: 0.78rem; font-weight: 700; }
+
+        /* Dark section / Beispiel */
+        .sec-dark { background: #0f172a; color: #fff; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+        .sec-dark .sec-head p { color: #94a3b8; }
+        .tab-bar { display: inline-flex; background: #070a12; padding: 0.35rem; border-radius: 1rem; border: 1px solid var(--border-dark); gap: 0.4rem; margin-top: 1.25rem; flex-wrap: wrap; justify-content: center; }
+        .tab-btn { padding: 0.65rem 1.15rem; border-radius: 0.75rem; font-size: 0.82rem; font-weight: 700; border: none; cursor: pointer; background: transparent; color: #94a3b8; }
+        .tab-btn.active { background: var(--brand); color: #fff; }
+        .proof-grid { display: grid; gap: 2rem; align-items: start; }
+        @media (min-width: 960px) { .proof-grid { grid-template-columns: 4fr 8fr; } }
+        .office-box { background: #0b0f17; border: 1px solid var(--border-dark); border-radius: var(--radius-xl); padding: 1.75rem; }
+        .warn-yellow { background: #fefce8; border: 1px solid #fde047; color: #713f12; border-radius: 0.85rem; padding: 1rem; margin: 1rem 0; font-size: 0.85rem; }
+        .info-blue { background: #f0f9ff; border: 1px solid #7dd3fc; color: #0c4a6e; border-radius: 0.85rem; padding: 1rem; margin: 1rem 0; font-size: 0.85rem; }
+        .pdf-box { background: #fff; color: #0f172a; border-radius: var(--radius-xl); padding: 2rem; box-shadow: 0 20px 45px rgba(0,0,0,0.4); }
+        .pdf-header { display: flex; flex-wrap: wrap; justify-content: space-between; border-bottom: 2px solid #0f172a; padding-bottom: 1.25rem; margin-bottom: 1.25rem; gap: 1rem; }
+        .pdf-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; background: #f8fafc; padding: 1rem; border-radius: 0.75rem; border: 1px solid var(--border-light); font-size: 0.8rem; margin-bottom: 1.25rem; }
+        table.pdf-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0.75rem 0 1.25rem; }
+        table.pdf-table th, table.pdf-table td { border: 1px solid var(--border-light); padding: 0.55rem 0.75rem; text-align: left; }
+        table.pdf-table th { background: #f1f5f9; }
+        .angebot-table td:nth-child(n+3), .angebot-table th:nth-child(n+3) { text-align: right; }
+
+        /* WhatsApp-Vergleich */
+        .wa-grid { display: grid; gap: 2rem; }
+        @media (min-width: 900px) { .wa-grid { grid-template-columns: 5fr 7fr; } }
+        .wa-bad { background: #090d16; border: 1px solid rgba(239, 68, 68, 0.35); border-radius: var(--radius-xl); padding: 2rem; }
+        .wa-good { background: #131c2e; border: 2px solid rgba(16, 185, 129, 0.45); border-radius: var(--radius-xl); padding: 2rem; }
+        .check-list li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.88rem; margin-bottom: 0.75rem; }
+
+        /* Rechner */
+        .calc-grid { display: grid; gap: 2.5rem; align-items: center; }
+        @media (min-width: 900px) { .calc-grid { grid-template-columns: 5fr 7fr; } }
+        .calc-box { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 2.25rem; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        input[type=range] { width: 100%; accent-color: var(--brand); margin: 0.5rem 0; cursor: pointer; }
+        .calc-res { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .calc-stat { background: var(--bg-light); border: 1px solid var(--border-light); padding: 1.1rem; border-radius: 1rem; }
+
+        /* FAQ */
+        details.faq-item { background: #fff; border: 1px solid var(--border-light); border-radius: 1rem; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+        details.faq-item summary { font-weight: 700; cursor: pointer; }
+        details.faq-item p { margin-top: 0.85rem; font-size: 0.92rem; color: var(--text-muted); }
+
+        /* Kontaktformular */
+        .cta-box { background: #111827; border: 1px solid #374151; border-radius: var(--radius-xl); padding: 2.5rem; display: grid; gap: 2.5rem; align-items: center; }
+        @media (min-width: 900px) { .cta-box { grid-template-columns: 6fr 6fr; padding: 3.5rem; } }
+        .form-card { background: #fff; color: var(--text-main); padding: 2rem; border-radius: 1.25rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; }
+        .form-control { width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.65rem; font-size: 0.9rem; background: #f8fafc; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .consent { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.78rem; color: var(--text-muted); margin: 0.25rem 0 1rem; }
+        .consent input { margin-top: 0.2rem; }
+        .consent a, .linkbtn { text-decoration: underline; color: var(--brand-hover); background: none; border: none; cursor: pointer; font-size: inherit; padding: 0; }
+        .msg-error { margin-top: 1rem; padding: 0.75rem; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; border-radius: 0.5rem; font-size: 0.8rem; font-weight: 700; }
+        .msg-ok { margin-top: 1rem; padding: 0.9rem; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; text-align: center; }
+
+        /* Footer & Modal */
+        footer { background: #05070c; color: #94a3b8; font-size: 0.8rem; padding: 3rem 0; border-top: 1px solid var(--border-dark); }
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(5, 7, 12, 0.8); display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 60; }
+        .modal-backdrop.open { display: flex; }
+        .modal-card { background: #fff; color: var(--text-main); max-width: 720px; width: 100%; max-height: 85vh; overflow-y: auto; border-radius: 1.25rem; padding: 2rem; }
+        .modal-card p { margin-bottom: 0.85rem; }
+        .modal-card ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 0.85rem; }
+        .i { width: 1.1em; height: 1.1em; vertical-align: -0.18em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .card-icon .i { width: 1.5rem; height: 1.5rem; }
+        .logo-icon .i { width: 1.4rem; height: 1.4rem; }
+        .check-list li > span:first-child .i { margin-top: 0.15rem; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Hinweisleiste -->
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <div>
+                <span class="topbar-tag">Praxis-Werkzeug</span>
+                <span>Ergänzt Ihren bestehenden Büro-Ablauf: fertiges PDF, CSV-Export oder Rechnungsentwurf für Lexoffice (Beta).</span>
+            </div>
+            <a href="#live-beweis">Muster-Regiebericht (Demo) ansehen ↓</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-inner">
+            <a href="#" class="logo" aria-label="TaktWerk – zum Seitenanfang">
+                <div class="logo-icon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+                <div>
+                    <span>Takt<span style="color:var(--brand)">Werk</span></span>
+                    <span class="logo-sub">Baustellen-Dokumentation</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" aria-label="Hauptnavigation">
+                <a href="#live-beweis">Beispiel</a>
+                <a href="#features-neu">Funktionen</a>
+                <a href="#mehr">Angebote & mehr</a>
+                <a href="#whatsapp-ordnung">WhatsApp & Datenschutz</a>
+                <a href="#rechner">Rechner</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div>
+                <a href="#kontakt" class="btn btn-primary">Unverbindlich testen →</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge badge-dark">Für SHK, Elektro, Dachdecker, Maler & Ausbaugewerke</span>
+                <h1>
+                    Ihre Monteure sprechen einfach ins Handy. <span class="text-gradient">Regiebericht, Nachträge & PDF sind in der Regel in unter einer Minute bereit.</span>
+                </h1>
+                <p>
+                    Schluss mit unleserlichen Stundenzetteln, vergessenen Zusatzarbeiten („Weil ich schon mal da war…“) und abendlicher Tipparbeit. <strong>TaktWerk</strong> wandelt eingesprochene Baustellen-Notizen in strukturierte Arbeitsberichte um – unterschriftsreif auf dem Smartphone.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#live-beweis" class="btn btn-primary">Muster-Beispiel (Familie Müller) ansehen ↓</a>
+                    <a data-demo href="#" target="_blank" rel="noopener" class="btn btn-outline-light hidden">Live-Demo selbst ausprobieren ↗</a>
+                    <a href="#kontakt" class="btn btn-outline-light">14 Tage im eigenen Betrieb testen</a>
+                </div>
+
+                <div class="hero-facts">
+                    <div>
+                        <div class="hero-fact-val">~ 20–60 Sek.</div>
+                        <div class="hero-fact-lbl">Von der Sprachnotiz bis zum fertigen Entwurf</div>
+                    </div>
+                    <div>
+                        <div class="hero-fact-val">In Minuten startklar</div>
+                        <div class="hero-fact-lbl">Persönlicher Web-Link oder WhatsApp, keine App-Installation</div>
+                    </div>
+                    <div>
+                        <div class="hero-fact-val">PDF · CSV · Lexoffice</div>
+                        <div class="hero-fact-lbl">Übergabe ins Büro (Lexoffice als Beta)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="teaser-card">
+                <div class="teaser-head">
+                    <div>
+                        <strong style="font-size:0.9rem; display:block;">Beispiel einer Monteur-Sprachnotiz</strong>
+                        <span style="font-size:0.75rem; color:#94a3b8;">Monteur: Kevin Schuster (Demo-Szenario)</span>
+                    </div>
+                    <span class="demo-pill">Muster-Daten</span>
+                </div>
+
+                <div class="quote-box">
+                    „Ja servus, also bei der <strong style="color:#fff; text-decoration:underline;">Müller in der Hauptstraße</strong>, die zwei <strong style="color:#34d399;">Eckventile unterm Waschtisch waren total vergammelt</strong>, hab beide neu gemacht und nen neuen <strong style="color:#34d399;">Flexschlauch</strong> dran, <strong style="color:#34d399;">Teflonband</strong> auch. Hat so <strong style="color:#fff;">zweieinhalb Stunden</strong> gedauert. Der <strong style="color:#fbbf24;">Siphon ist auch durch, den hab ich aber nicht dabei</strong>, muss ich nächste Woche nochmal hin. Ach ja, und weil ich schon da war, wollte sie noch, dass ich im <strong style="color:#38bdf8;">Gäste-WC den Spülkasten mach, hab das Füllventil getauscht, zwanzig Minuten</strong>.“
+                </div>
+
+                <div style="font-size:0.72rem; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:0.5rem;">
+                    Was TaktWerk daraus strukturiert:
+                </div>
+                <div class="mini-grid">
+                    <div class="mini-item"><strong style="color:#fbbf24;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/></svg> Nachbestellen:</strong> 1x Siphon DN 40</div>
+                    <div class="mini-item"><strong style="color:#38bdf8;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Nachtrag:</strong> +20 Min. Gäste-WC</div>
+                    <div class="mini-item"><strong style="color:#34d399;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg> Material:</strong> 4 Positionen gelistet</div>
+                    <div class="mini-item"><strong style="color:#c084fc;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg> PDF-Beleg:</strong> Bereit zur Unterschrift</div>
+                </div>
+
+                <a href="#live-beweis" class="btn btn-outline-light" style="width:100%; font-size:0.8rem;">
+                    Unten das komplette Büro-Ergebnis & PDF ansehen ↓
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funktionen rund um den Bericht -->
+    <section id="features-neu" style="background:#fff;">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-brand">Funktionen für den Baustellen-Alltag</span>
+                <h2>Weniger Tipparbeit draußen – strukturierte Vorlagen drinnen</h2>
+                <p>
+                    TaktWerk nutzt moderne Sprach- und Text-KI mit gezielten Handwerks-Vorgaben, damit aus kurzen Zurufen saubere Dokumentationen entstehen. Die KI arbeitet zu – geprüft und unterschrieben wird weiterhin von Menschen.
+                </p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#fff7ed; color:#ea580c;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg></div>
+                        <h3>Standardleistungen („Wie immer“)</h3>
+                        <p>
+                            Hinterlegen Sie am Kunden oder direkt am Auftrag Ihre typischen Arbeitsschritte (z. B. für eine Jahreswartung) – auf Wunsch samt Standard-Material. Der Monteur sieht bis zu 5 klare Stichpunkte über der Aufnahme und sagt nur noch: <em>„Wartung wie immer, zusätzlich Dichtung getauscht.“</em>
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#ea580c;">
+                        ✓ Zeit und Material werden nicht ungeprüft vom Vorbericht übernommen
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#ecfdf5; color:#059669;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.500 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                        <h3>Filter für private Nachrichten</h3>
+                        <p>
+                            Schreibt ein Monteur versehentlich <em>„Komme heute später, muss zum Arzt“</em> an den Firmen-Kanal, stuft das System dies als privat ein und speichert es nicht. Bei gemischten Sätzen bleibt der private Teil aus dem Kundenbericht heraus. Im Zweifel gilt eine Nachricht als Bericht – der Monteur bekommt immer eine Rückmeldung.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#059669;">
+                        ✓ Keine privaten Notizen auf dem Kunden-Regiebericht
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#eff6ff; color:#2563eb;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></div>
+                        <h3>Mitdenkende Rückfragen</h3>
+                        <p>
+                            Schickt ein Monteur nur Fotos, wartet das System 45 Sekunden auf eine Sprachnotiz und fragt sonst kurz nach. Fehlt der Kundenname oder wurde der falsche Auftrag erwischt, lässt sich die Zuordnung direkt per Antwort-Knopf korrigieren.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#2563eb;">
+                        ✓ Weitergeleitete Nachrichten werden im Büro zur Prüfung markiert
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mehr als Berichte -->
+    <section id="mehr" style="background:var(--bg-light); border-top:1px solid var(--border-light);">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-brand">Mehr als Berichte</span>
+                <h2>Vom Angebot bis zur Wartungserinnerung – alles aus dem Handy heraus</h2>
+                <p>
+                    Dieselbe Sprach-Eingabe, die Berichte erzeugt, hilft auch beim Angebot, bei der Tagesübersicht und bei der Nachverfolgung.
+                </p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#fff7ed; color:#ea580c;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+                        <h3>Angebot per Sprachnachricht <span class="beta">Beta</span></h3>
+                        <p>
+                            Beim Kunden vor Ort sprechen: <em>„Angebot für Familie Schneider: Waschtisch tauschen, zwei Eckventile, vier Stunden, der Waschtisch kostet 280 Euro.“</em> TaktWerk legt daraus einen Angebotsentwurf mit Positionen an. <strong>Preise werden nie geschätzt</strong>: Sie stammen aus Ihrem Stundensatz, Ihrer eigenen Preisliste (importierbar per CSV) oder aus dem, was genannt wurde. Fehlt ein Preis, bleibt das Angebot gesperrt, bis er eingetragen ist. Freigabe im Büro oder per Knopf in WhatsApp; der Kunde unterschreibt auf dem Handy, danach entsteht der Auftrag automatisch.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#ea580c;">Wird derzeit gemeinsam mit Testbetrieben erprobt</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#eff6ff; color:#2563eb;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M6 18a6 6 0 0 1 12 0M12 5v3M4.500 9.500 6.500 11.500M19.500 9.500l-2 2"/></svg></div>
+                        <h3>Feierabend-Bericht</h3>
+                        <p>
+                            Jeden Abend eine kurze Tagesbilanz per E-Mail: erledigte Berichte, <em>geschätzt</em> abrechnungsreife Arbeitszeit, fehlende Unterschriften, noch nicht bestelltes Material, offene Angebote und die Einsätze von morgen – inklusive Warnung, wenn ein Einsatz noch keinen Monteur hat.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#2563eb;">Auf ruhigen Tagen kommt keine Mail</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#ecfdf5; color:#059669;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.500 6.500a4 4 0 0 0 5 5L11 20a2.100 2.100 0 0 1-3-3l8.500-8.500"/><path d="M14.500 6.500a4 4 0 0 1 5-3l-2.500 2.500 1 1 2.500-2.500a4 4 0 0 1-3 5"/></svg></div>
+                        <h3>Wartungs-Erinnerung</h3>
+                        <p>
+                            Legen Sie Wartungspläne je Kunde an („Jährliche Wartung Gastherme“). TaktWerk zeigt, was fällig ist, legt auf Klick den Termin an und formuliert die Erinnerung vor. <strong>Abgeschickt wird sie von Ihnen</strong> – es geht nichts automatisch an Ihre Kunden.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#059669;">Wiederkehrender Umsatz ohne Zettelwirtschaft</div>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#f5f3ff; color:#7c3aed;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-4M10 20v-8M15 20V8M20 20V4"/></svg></div>
+                        <h3>Auch ohne Netz im Keller</h3>
+                        <p>
+                            Die Monteur-Ansicht erfasst Berichte, Fotos, Sprachaufnahmen und Unterschriften zunächst auf dem Gerät und überträgt sie automatisch, sobald wieder Netz da ist. Ein Statusbalken zeigt jederzeit, was schon gespeichert ist und was noch wartet.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#7c3aed;">Nichts geht verloren, wenn der Empfang fehlt</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#fff7ed; color:#ea580c;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+                        <h3>Kopie für den Kunden – freiwillig</h3>
+                        <p>
+                            Nach der Unterschrift kann der Kunde den Bericht als PDF herunterladen oder sich <em>freiwillig</em> eine Kopie an seine selbst eingegebene E-Mail-Adresse schicken lassen. Der Monteur muss nichts abfragen. Hausverwaltungen erhalten auf Wunsch jeden unterschriebenen Bericht automatisch.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#ea580c;">Die Adresse wird nur für diesen einen Versand genutzt</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#fefce8; color:#a16207;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></div>
+                        <h3>Bestellzettel & Nachträge</h3>
+                        <p>
+                            Fehlendes Material landet als gelber Hinweis im Büro und lässt sich nach Auftrag gruppiert als Bestellzettel kopieren oder mailen. Zusatzarbeiten vor Ort werden als eigener Nachtrag ausgewiesen und vom Kunden bei der Unterschrift ausdrücklich mit abgenommen.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#a16207;">Weniger vergessene Teile, weniger verschenkte Regiearbeit</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Muster-Beispiel -->
+    <section id="live-beweis" class="sec-dark">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-dark">Anschauliches Muster-Beispiel (Demo-Daten)</span>
+                <h2>Vom gesprochenen Monteur-Text zum fertigen PDF-Regiebericht</h2>
+                <p>
+                    Anhand dieses Demo-Auftrags (<em>Familie Müller – Badsanierung</em>) sehen Sie, wie das Büro-Dashboard und das erzeugte PDF-Dokument aufgebaut sind. Die Daten sind fiktiv:
+                </p>
+
+                <div class="tab-bar" role="tablist" aria-label="Ansicht wählen">
+                    <button id="btnViewOffice" class="tab-btn active" role="tab" aria-selected="true" aria-controls="tabContentOffice" onclick="switchProofTab('office')">
+                        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 21h8M12 16v5"/></svg> 1. Ansicht im Büro-Dashboard
+                    </button>
+                    <button id="btnViewPdf" class="tab-btn" role="tab" aria-selected="false" aria-controls="tabContentPdf" onclick="switchProofTab('pdf')">
+                        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg> 2. Erzeugtes Kunden-PDF (Regiebericht)
+                    </button>
+                </div>
+            </div>
+
+            <div class="proof-grid">
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <div class="office-box">
+                        <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:#fb923c; font-weight:700; margin-bottom:0.75rem;">
+                            <span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg> Eingesprochenes Original-Transkript</span>
+                            <span style="color:#94a3b8;">Demo-Aufnahme</span>
+                        </div>
+                        <p style="font-size:0.85rem; color:#e2e8f0; font-style:italic; background:#070a12; padding:1rem; border-radius:0.85rem; border:1px solid var(--border-dark);">
+                            „Ja servus, also bei der Müller in der Hauptstraße, die zwei Eckventile unterm Waschtisch waren total vergammelt, hab beide neu gemacht und nen neuen Flexschlauch dran, Teflonband auch. Hat so zweieinhalb Stunden gedauert. Der Siphon ist auch durch, den hab ich aber nicht dabei, muss ich nächste Woche nochmal hin. Ach ja, und weil ich schon da war, wollte sie noch, dass ich im Gäste-WC den Spülkasten mach, der lief dauernd nach, hab das Füllventil getauscht, zwanzig Minuten.“
+                        </p>
+                    </div>
+
+                    <div class="office-box">
+                        <h3 style="font-size:1rem; margin-bottom:0.85rem;">Was Ihnen diese Aufbereitung im Alltag bringt:</h3>
+                        <ul class="check-list" style="color:#cbd5e1;">
+                            <li>
+                                <strong style="color:#38bdf8;">1.</strong>
+                                <div><strong>Nachträge sichtbar machen:</strong> Zusatzwünsche vor Ort (wie das Füllventil im Gäste-WC) gehen nicht im Fließtext unter, sondern werden als eigener Block ausgewiesen.</div>
+                            </li>
+                            <li>
+                                <strong style="color:#fbbf24;">2.</strong>
+                                <div><strong>Fehlendes Material sofort im Blick:</strong> Noch benötigte Teile (<em>1x Siphon DN 40</em>) erscheinen direkt als gelber Bestell-Hinweis im Büro.</div>
+                            </li>
+                            <li>
+                                <strong style="color:#34d399;">3.</strong>
+                                <div><strong>Sachliche Formulierung:</strong> Umgangssprache („total vergammelt“) wird in einen vorzeigbaren Berichtstext („korrodierte Eckventile ersetzt“) übertragen.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="tabContentOffice" class="office-box" role="tabpanel">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+                            <div style="font-size:0.8rem;">
+                                <strong>Kevin Schuster</strong> <span style="color:#94a3b8;">· 11.11.2026, 08:17 (Demo)</span>
+                            </div>
+                            <div style="display:flex; gap:0.5rem; align-items:center;">
+                                <span style="background:#d1fae5; color:#065f46; font-size:0.72rem; font-weight:700; padding:0.2rem 0.65rem; border-radius:999px;">Zugeordnet</span>
+                                <button onclick="switchProofTab('pdf')" style="background:#1e293b; color:#e2e8f0; border:1px solid #334155; padding:0.25rem 0.65rem; border-radius:0.5rem; font-size:0.75rem; cursor:pointer;">
+                                    <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg> PDF-Ansicht öffnen
+                                </button>
+                            </div>
+                        </div>
+
+                        <div style="font-weight:700; font-size:0.95rem; margin-bottom:0.75rem;">
+                            Familie Müller – Badsanierung – Armaturen tauschen
+                        </div>
+
+                        <div class="warn-yellow">
+                            <strong><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/></svg> Fehlendes Material – nachbestellen</strong>
+                            <div style="margin-top:0.25rem;">• 1x Siphon DN 40 (Waschtisch)</div>
+                        </div>
+
+                        <p style="font-size:0.88rem; color:#e2e8f0; line-height:1.6;">
+                            Wir haben die beiden korrodierten Eckventile unter dem Waschtisch ausgebaut und durch neue Eckventile ersetzt. Zusätzlich wurde ein neuer Flexschlauch montiert und alle Verbindungen fachgerecht abgedichtet. Der Siphon am Waschtisch ist ebenfalls verschlissen und muss ausgetauscht werden; hierfür ist ein weiterer Termin erforderlich.
+                        </p>
+
+                        <div class="info-blue">
+                            <strong><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Zusätzlich vor Ort beauftragte Leistungen (Nachtrag)</strong>
+                            <p style="margin-top:0.35rem;">Auf Wunsch des Auftraggebers zusätzlich im Gäste-WC das defekte Füllventil des Spülkastens ausgetauscht (Spülkasten lief ständig nach). Zeitaufwand ca. 20 Minuten.</p>
+                            <span style="font-size:0.72rem; color:#0284c7; display:block; margin-top:0.35rem;">Wird dem Kunden bei der Unterschrift angezeigt.</span>
+                        </div>
+
+                        <div style="font-size:0.78rem; color:#94a3b8; margin:0.75rem 0;">
+                            KI-Hinweis Kunde/Ort: „Müller Hauptstraße“
+                        </div>
+
+                        <div style="display:flex; gap:1rem; font-size:0.85rem; font-weight:700; margin-bottom:1rem;">
+                            <span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 h 30 min</span>
+                            <span style="color:#f59e0b;">Nacharbeit nötig</span>
+                        </div>
+
+                        <div style="font-size:0.85rem;">
+                            <strong>Material verbaut</strong>
+                            <ul style="margin-top:0.4rem; color:#cbd5e1; list-style:disc; padding-left:1.25rem;">
+                                <li>2 Stk Eckventil 1/2 Zoll</li>
+                                <li>1 Stk Flexschlauch</li>
+                                <li>1 Rolle Teflonband</li>
+                                <li>1 Stk Füllventil Spülkasten</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="tabContentPdf" class="pdf-box hidden" role="tabpanel">
+                        <div class="pdf-header">
+                            <div>
+                                <div style="font-weight:800; font-size:1.1rem;">Muster Haustechnik GmbH (Demo)</div>
+                                <div style="font-size:0.78rem; color:#475569;">Sanitär · Heizung · Solar</div>
+                                <div style="font-size:0.75rem; color:#64748b; margin-top:0.35rem;">
+                                    Werkstattweg 5 · 80335 München<br>
+                                    info@muster-haustechnik.example
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <span style="background:#0f172a; color:#fff; font-size:0.72rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px; text-transform:uppercase;">Regiebericht</span>
+                                <div style="font-size:0.8rem; font-weight:700; margin-top:0.35rem;">Nr. 26365E89 · 11.11.2026</div>
+                                <div style="font-size:0.75rem; color:#64748b;">Auftrags-Nr.: A-2026-0815</div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-meta">
+                            <div>
+                                <span style="font-size:0.68rem; text-transform:uppercase; color:#64748b; font-weight:700;">Auftraggeber</span>
+                                <div style="font-weight:700;">Familie Müller</div>
+                                <div>Hauptstraße 12, 80331 München</div>
+                            </div>
+                            <div>
+                                <span style="font-size:0.68rem; text-transform:uppercase; color:#64748b; font-weight:700;">Baustelle / Auftrag</span>
+                                <div style="font-weight:700;">Badsanierung - Armaturen tauschen</div>
+                                <div>Hauptstraße 12, 80331 München</div>
+                            </div>
+                            <div>
+                                <span style="font-size:0.68rem; text-transform:uppercase; color:#64748b; font-weight:700;">Ausführung</span>
+                                <div style="font-weight:700;">Monteur: Kevin Schuster</div>
+                                <div>Arbeitszeit: <strong>2:30 Std. (150 Min.)</strong></div>
+                            </div>
+                        </div>
+
+                        <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:#64748b; margin-bottom:0.35rem;">Ausgeführte Arbeiten</div>
+                        <p style="font-size:0.85rem; padding:0.75rem; border:1px solid var(--border-light); border-radius:0.5rem; margin-bottom:1rem;">
+                            Wir haben die beiden korrodierten Eckventile unter dem Waschtisch ausgebaut und durch neue Eckventile ersetzt. Zusätzlich wurde ein neuer Flexschlauch montiert und alle Verbindungen fachgerecht abgedichtet. Der Siphon am Waschtisch ist ebenfalls verschlissen und muss ausgetauscht werden; hierfür ist ein weiterer Termin erforderlich.
+                        </p>
+
+                        <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:#64748b;">Verbautes Material</div>
+                        <table class="pdf-table">
+                            <thead>
+                                <tr><th>Pos.</th><th>Bezeichnung</th><th>Menge</th><th>Einheit</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Eckventil 1/2 Zoll</td><td>2</td><td>Stk</td></tr>
+                                <tr><td>2</td><td>Flexschlauch</td><td>1</td><td>Stk</td></tr>
+                                <tr><td>3</td><td>Teflonband</td><td>1</td><td>Rolle</td></tr>
+                                <tr><td>4</td><td>Füllventil Spülkasten</td><td>1</td><td>Stk</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-blue" style="margin:0.75rem 0;">
+                            <strong>Zusätzlich vor Ort beauftragte Leistungen (Nachtrag):</strong><br>
+                            Auf Wunsch des Auftraggebers zusätzlich im Gäste-WC das defekte Füllventil des Spülkastens ausgetauscht (Spülkasten lief ständig nach). Zeitaufwand ca. 20 Minuten.
+                        </div>
+
+                        <div class="warn-yellow" style="margin:0.75rem 0;">
+                            <strong>Offene Punkte (Weiterer Termin erforderlich):</strong><br>
+                            • Noch zu liefern / nachzubestellen: 1x Siphon DN 40 (Waschtisch)
+                        </div>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--border-light); font-size:0.75rem; color:#475569;">
+                            <div style="border-top:1px solid #94a3b8; padding-top:0.35rem;">Datum, Unterschrift Auftragnehmer</div>
+                            <div style="border-top:1px solid #94a3b8; padding-top:0.35rem;">Datum, digitale Unterschrift Auftraggeber (mit Zeitstempel)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typische Engpässe -->
+    <section id="alltag">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-brand">Bekannte Engpässe im Alltag</span>
+                <h2>Wo zwischen Baustelle und Büro regelmäßig Zeit und Geld verloren gehen</h2>
+                <p>
+                    Die handwerkliche Arbeit vor Ort sitzt – doch bei der Weitergabe ans Büro entstehen im Tagesgeschäft drei klassische Reibungsverluste:
+                </p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <h3>1. Unvollständige Stundenzettel am Freitag</h3>
+                        <p>
+                            Wenn Berichte erst Tage später aus dem Gedächtnis geschrieben werden, fehlen Details, Handschriften sind schwer lesbar und im Büro entstehen zeitraubende Rückfragen an die Monteure.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#dc2626;">Hoher Nachbearbeitungsaufwand im Büro</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>2. Nicht aufgeschriebene Zusatzarbeiten</h3>
+                        <p>
+                            Schnell noch ein Ventil im Gäste-WC getauscht oder zwei Kleinteile aus dem Fahrzeug geholt: Was nicht sofort beim Verlassen der Baustelle erfasst wird, taucht später oft auf keiner Rechnung mehr auf.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#dc2626;">Verschenkter Umsatz bei Regiearbeiten</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>3. Überladene Apps werden gemieden</h3>
+                        <p>
+                            Komplexe Formulare mit vielen Pflichtfeldern sorgen auf der Baustelle für Frust. Als Ausweichlösung landen Fotos und Sprachnotizen dann ungeordnet in privaten Gruppenchats.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#dc2626;">Fotos und Infos ohne klaren Auftragsbezug</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp & Datenschutz -->
+    <section id="whatsapp-ordnung" class="sec-dark">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-dark">Strukturierter Kanal statt Gruppen-Durcheinander</span>
+                <h2>Warum ein 1:1-Berichtskanal besser funktioniert als die Firmen-WhatsApp-Gruppe</h2>
+                <p>
+                    Viele Teams nutzen WhatsApp aus Bequemlichkeit. TaktWerk sorgt dafür, dass Nachrichten nicht mehr in unübersichtlichen Gruppen untergehen, sondern strukturiert am Auftrag landen.
+                </p>
+            </div>
+
+            <div class="wa-grid">
+                <div class="wa-bad">
+                    <span class="badge" style="background:rgba(239,68,68,0.15); color:#f87171; margin-bottom:1rem;">Offene WhatsApp-Gruppe</span>
+                    <h3 style="font-size:1.25rem; margin-bottom:1rem;">Ungeordnete Sammel-Chats</h3>
+                    <ul class="check-list" style="color:#cbd5e1;">
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#f87171"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></span><span><strong>Alle lesen alles mit:</strong> Kundendaten, Adressen und Fotos aus Privatwohnungen landen auf den Smartphones sämtlicher Gruppenmitglieder.</span></li>
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#f87171"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></span><span><strong>Fehlende Zuordnung:</strong> Werden vier Bilder ohne Text geschickt, muss das Büro mühsam nachfragen, zu welcher Baustelle sie gehören.</span></li>
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#f87171"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg></span><span><strong>Vermischung mit Privatem:</strong> Krankmeldungen, Rückfragen und Baustellenberichte liegen ungefiltert im selben Chatverlauf.</span></li>
+                    </ul>
+                </div>
+
+                <div class="wa-good">
+                    <span class="badge" style="background:rgba(16,185,129,0.2); color:#34d399; margin-bottom:1rem;">Mit TaktWerk (Web-App & WhatsApp Business)</span>
+                    <h3 style="font-size:1.25rem; margin-bottom:1rem;">Gezielte Erfassung pro Monteur & Auftrag</h3>
+                    <ul class="check-list" style="color:#e2e8f0;">
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#34d399"><circle cx="12" cy="12" r="9"/><path d="m8.500 12.500 2.500 2.500 4.500-5"/></svg></span><span><strong>Einzelkanal statt Gruppe:</strong> Jeder Monteur schreibt entweder über seinen persönlichen Browser-Link (ganz ohne WhatsApp) oder im 1:1-Chat an die TaktWerk-Firmennummer. Es gibt keine Gruppe und keine Mitleser aus dem Team.</span></li>
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#34d399"><circle cx="12" cy="12" r="9"/><path d="m8.500 12.500 2.500 2.500 4.500-5"/></svg></span><span><strong>Automatische Rückfrage bei Lücken:</strong> Fehlt bei Fotos die Beschreibung oder der Kundenname, fragt das System gezielt beim Monteur nach, bevor der Bericht im Büro abgelegt wird.</span></li>
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#34d399"><circle cx="12" cy="12" r="9"/><path d="m8.500 12.500 2.500 2.500 4.500-5"/></svg></span><span><strong>Digitale Unterschrift mit Zeitstempel:</strong> Über den generierten Link kann der Kunde den fertigen Bericht inklusive ausgewiesener Nachträge direkt auf dem Display unterzeichnen.</span></li>
+                        <li><span><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#94a3b8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg></span><span><strong>Transparente Datenverarbeitung:</strong> Für die WhatsApp-Übermittlung (Meta) sowie die KI-Sprach- und Textverarbeitung (z. B. Groq und weitere KI-Anbieter, teils mit Verarbeitung in den USA) werden spezialisierte Auftragsverarbeiter genutzt. Details finden Sie in den Datenschutzhinweisen.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Büro-Übergabe -->
+    <section id="erp-addon" style="background:#fff;">
+        <div class="container">
+            <div class="sec-head">
+                <span class="badge badge-brand">Büro-Übergabe ohne Systemwechsel</span>
+                <h2>Wie die fertigen Berichte in Ihre Abrechnung gelangen</h2>
+                <p>
+                    Sie müssen Ihre bestehende kaufmännische Software nicht umstellen. TaktWerk konzentriert sich auf die Erfassung auf der Baustelle und stellt die Ergebnisse sauber für Ihr Büro bereit:
+                </p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#fff7ed; color:#ea580c;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div>
+                        <h3>Fertiges PDF-Dokument</h3>
+                        <p>
+                            Jeder Regiebericht wird als übersichtliches DIN-A4-PDF mit Arbeitszeit, verbautem Material, Nachträgen und digitaler Kundenunterschrift erzeugt – bereit für Ihre digitale Bauakte oder den Versand an den Kunden.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#0f172a;">Sofort herunterladbar & archivierbar</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#eff6ff; color:#2563eb;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+                        <h3>CSV-Export & Kopiervorlage</h3>
+                        <p>
+                            Arbeiten Sie mit einer klassischen Handwerkersoftware? Über den strukturierten CSV-Export sowie die aufbereiteten Text- und Materialblöcke übernehmen Sie Zeiten und Positionen ohne erneutes Abtippen von Papierbelegen.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#2563eb;">Kein Entziffern von Handschriften mehr</div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="card-icon" style="background:#ecfdf5; color:#059669;"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div>
+                        <h3>Lexoffice-Entwurf <span class="beta">Beta</span></h3>
+                        <p>
+                            Betriebe, die <strong>Lexoffice</strong> nutzen, können aus einem Regiebericht oder einem Angebot einen <em>Entwurf</em> anlegen lassen und dort wie gewohnt prüfen und finalisieren. Die Anbindung wird gerade gemeinsam mit Testbetrieben abgestimmt.
+                        </p>
+                    </div>
+                    <div class="card-foot" style="color:#059669;">Es entsteht nur ein Entwurf – nichts wird automatisch abgerechnet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rechner -->
+    <section id="rechner" style="border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light);">
+        <div class="container calc-grid">
+            <div>
+                <span class="badge badge-brand">Unverbindliche Modellrechnung</span>
+                <h2 style="font-size:2rem; font-weight:800; margin:0.85rem 0;">Schätzen Sie Ihren eigenen Zeit- und Umsatzhebel</h2>
+                <p style="color:var(--text-muted); margin-bottom:1rem;">
+                    Wie viel ein Betrieb durch digitale Sprachberichte einspart, hängt von der Auftragsstruktur ab. Stellen Sie rechts selbst ein, wie viele Monteure Sie beschäftigen und wie viel Zeit Sie pro Woche realistisch einschätzen.
+                </p>
+                <p style="font-size:0.78rem; color:#64748b;">
+                    *Hinweis: Es handelt sich um eine rein rechnerische Kalkulationshilfe auf Basis Ihrer eigenen Schieberegler-Eingaben, nicht um eine garantierte Ersparnis.
+                </p>
+            </div>
+
+            <div class="calc-box">
+                <div style="margin-bottom:1.25rem;">
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.9rem; gap:1rem;">
+                        <label for="monteurSlider">Anzahl Monteure:</label>
+                        <span id="monteurVal" style="color:var(--brand);">5 Monteure</span>
+                    </div>
+                    <input id="monteurSlider" type="range" min="1" max="25" value="5" oninput="updateROI()">
+                </div>
+
+                <div style="margin-bottom:1.25rem;">
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.9rem; gap:1rem;">
+                        <label for="hoursSlider">Geschätzte Zeitersparnis (Monteur + Büro) pro Woche:</label>
+                        <span id="hoursVal" style="white-space:nowrap;">1,5 Std. / Woche je Monteur</span>
+                    </div>
+                    <input id="hoursSlider" type="range" min="0.5" max="4" step="0.5" value="1.5" oninput="updateROI()">
+                </div>
+
+                <div style="margin-bottom:1.25rem;">
+                    <div style="display:flex; justify-content:space-between; font-weight:700; font-size:0.9rem; gap:1rem;">
+                        <label for="rateSlider">Ihr Stundensatz:</label>
+                        <span id="rateVal">68 € / Std.</span>
+                    </div>
+                    <input id="rateSlider" type="range" min="45" max="110" value="68" oninput="updateROI()">
+                </div>
+
+                <div class="calc-res">
+                    <div class="calc-stat">
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Eingesparte Arbeitszeit / Monat:</div>
+                        <div id="resHours" style="font-size:1.4rem; font-weight:800; margin-top:0.25rem;">30,0 Std.</div>
+                    </div>
+                    <div class="calc-stat">
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Gegenwert der Zeit / Monat:</div>
+                        <div id="resValue" style="font-size:1.4rem; font-weight:800; color:var(--brand); margin-top:0.25rem;">2.040 €</div>
+                    </div>
+                </div>
+
+                <a href="#kontakt" class="btn btn-primary" style="width:100%;">Im eigenen Betrieb kostenlos ausprobieren</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background:#fff;">
+        <div class="container" style="max-width:860px;">
+            <div class="sec-head">
+                <span class="badge badge-brand">Häufige Fragen</span>
+                <h2>Klare Antworten vorab</h2>
+            </div>
+
+            <details class="faq-item" open>
+                <summary>Wie groß ist der Einrichtungsaufwand für meine Monteure?</summary>
+                <p>
+                    Sehr gering: Im Büro legen Sie den Mitarbeiter einmal mit Namen und Mobilnummer an. Danach erhält der Monteur seinen persönlichen Web-Link (z. B. als Lesezeichen auf dem Startbildschirm) oder speichert die WhatsApp-Nummer ab. Es gibt keine komplizierten Menüs – es wird gesprochen und fotografiert.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Was kostet TaktWerk?</summary>
+                <p>
+                    <span data-site="preis"></span> Im 14-tägigen Praxistest entstehen Ihnen keine Kosten, und es gibt keine automatische Vertragsverlängerung. Einen konkreten Preis für Ihre Betriebsgröße nennen wir Ihnen vorab, bevor etwas verbindlich wird.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Welche Sprachen werden bei der Spracheingabe unterstützt?</summary>
+                <p>
+                    Der Schwerpunkt liegt auf <strong>Deutsch</strong> (inklusive gängiger Umgangssprache auf der Baustelle). Die Spracherkennung kann weitere Sprachen automatisch erkennen und daraus einen deutschen Bericht formulieren; wie gut das bei Ihrem Team funktioniert, probieren wir gern im Praxistest mit echten Aufnahmen aus. Antworten und Rückfragen des Systems an den Monteur erscheinen derzeit auf Deutsch.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Kann ich zu 100 % blind auf die KI-Erkennung vertrauen?</summary>
+                <p>
+                    Nein – und genau deshalb ist TaktWerk so gebaut, dass Mensch und Technik zusammenarbeiten: Vor der Kundenunterschrift wird der aufbereitete Bericht samt Nachträgen klar angezeigt, im Büro sind automatisch übernommene Standardleistungen deutlich gekennzeichnet („nach Standardleistung“ / „wie letzter Bericht“), und Angebote gehen nie ohne Ihre Freigabe und vollständige Preise an den Kunden.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Wo liegen meine Daten, und was passiert mit privaten Nachrichten?</summary>
+                <p>
+                    Berichte, Kunden- und Auftragsdaten liegen auf den Servern von TaktWerk (Details in den Datenschutzhinweisen). Für Sprach- und Textverarbeitung sowie WhatsApp werden Auftragsverarbeiter eingesetzt, teils mit Verarbeitung in den USA auf Grundlage der EU-Standardvertragsklauseln bzw. des Data Privacy Frameworks. Private Nachrichten werden nach der automatischen Einstufung nicht gespeichert; Sprachaufnahmen werden nach der Abnahme automatisch gelöscht (einstellbar). Alte WhatsApp-Gruppenchats werden bewusst nicht ausgelesen.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Kann ich meine Daten mitnehmen oder löschen lassen?</summary>
+                <p>
+                    Ja. Als Administrator können Sie jederzeit einen vollständigen Datenexport erzeugen und Ihren Betrieb samt aller Daten selbst löschen. Es gibt keine automatische Vertragsverlängerung.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Fallen für WhatsApp zusätzliche Kosten an?</summary>
+                <p>
+                    Der WhatsApp-Kanal nutzt die WhatsApp Business Plattform von Meta; dafür können nutzungsabhängige Gebühren von Meta anfallen, über die wir Sie vorab informieren. Die Browser-Ansicht für Monteure funktioniert vollständig ohne WhatsApp.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Funktioniert die Monteur-Ansicht auch ohne Netz?</summary>
+                <p>
+                    Ja. Berichte, Fotos, Sprachaufnahmen und Unterschriften werden zunächst auf dem Gerät gespeichert und automatisch übertragen, sobald wieder Verbindung besteht. Die Auswertung durch die KI erfolgt dann nach der Übertragung.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Kontakt / Testzugang -->
+    <section id="kontakt" style="background:var(--bg-dark); color:#fff;">
+        <div class="container">
+            <div class="cta-box">
+                <div>
+                    <span class="badge badge-dark">Unverbindlicher Praxistest</span>
+                    <h2 style="font-size:2.1rem; font-weight:800; margin:1rem 0;">Testen Sie TaktWerk 14 Tage lang im echten Baustellenbetrieb.</h2>
+                    <p style="color:#cbd5e1; margin-bottom:1.5rem;">
+                        Probieren Sie mit einem oder zwei Monteuren aus, wie gut die Spracheingabe und die Regieberichte in Ihren Arbeitsalltag passen.
+                    </p>
+                    <ul class="check-list" style="color:#cbd5e1;">
+                        <li><span>✓</span><span>Persönliche Unterstützung bei der Ersteinrichtung</span></li>
+                        <li><span>✓</span><span>Testbar per Browser-Link und WhatsApp</span></li>
+                        <li><span>✓</span><span>Keine automatische Vertragsverlängerung</span></li>
+                        <li><span>✓</span><span>Preis: <span data-site="preis" style="color:#fff;"></span></span></li>
+                    </ul>
+                    <p style="margin-top:1.25rem; font-size:0.9rem; color:#cbd5e1;">
+                        Lieber direkt sprechen? Rufen Sie an: <a data-site-tel style="color:#fb923c; font-weight:700; text-decoration:underline;"><span data-site="telefon"></span></a>
+                    </p>
+                    <p style="margin-top:0.75rem;">
+                        <a data-demo href="#" target="_blank" rel="noopener" class="btn btn-outline-light hidden">Oder gleich die Live-Demo ausprobieren ↗</a>
+                    </p>
+                </div>
+
+                <div class="form-card">
+                    <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:1rem;">Testzugang oder Rückruf anfordern</h3>
+                    <form id="leadForm" novalidate>
+                        <div class="form-group">
+                            <label for="fName">Vor- & Nachname *</label>
+                            <input id="fName" type="text" required autocomplete="name" placeholder="Max Mustermann" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="fCompany">Handwerksbetrieb *</label>
+                            <input id="fCompany" type="text" required autocomplete="organization" placeholder="Muster Haustechnik GmbH" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="fSize">Anzahl Monteure</label>
+                            <select id="fSize" class="form-control">
+                                <option value="">Bitte wählen (optional)</option>
+                                <option value="1-4">1 – 4 Monteure</option>
+                                <option value="5-15">5 – 15 Monteure</option>
+                                <option value="15+">Über 15 Monteure</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fContact">Telefonnummer oder E-Mail *</label>
+                            <input id="fContact" type="text" required autocomplete="tel" placeholder="0171 / 1234567 oder info@betrieb.de" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="fMessage">Nachricht (optional)</label>
+                            <textarea id="fMessage" rows="3" maxlength="2000" placeholder="Wann dürfen wir Sie erreichen? Was ist Ihnen besonders wichtig?" class="form-control"></textarea>
+                        </div>
+
+                        <!-- Honeypot: für Menschen unsichtbar, Bots füllen es aus und werden verworfen -->
+                        <div class="hp" aria-hidden="true">
+                            <label for="fWebsite">Website</label>
+                            <input id="fWebsite" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <label class="consent">
+                            <input id="fConsent" type="checkbox" required>
+                            <span>Ich habe die <button type="button" class="linkbtn" onclick="openLegalModal('datenschutz')">Datenschutzhinweise</button> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden.</span>
+                        </label>
+
+                        <button id="fSubmit" type="submit" class="btn btn-primary" style="width:100%;">Anfrage absenden</button>
+                        <div id="formError" class="msg-error hidden" role="alert"></div>
+                        <div id="formSuccess" class="msg-ok hidden" role="status">
+                            Vielen Dank! Wir haben Ihre Anfrage erhalten und melden uns kurzfristig bei Ihnen.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+            <div>
+                <strong style="color:#fff;">TaktWerk</strong> · Baustellendokumentation für das Handwerk<br>
+                <span>© <span id="year">2026</span> <span data-site="firma"></span></span>
+            </div>
+            <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+                <button onclick="openLegalModal('impressum')" style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.8rem;">Impressum</button>
+                <button onclick="openLegalModal('datenschutz')" style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.8rem;">Datenschutzhinweise</button>
+                <button id="agbBtn" onclick="openLegalModal('agb')" class="hidden" style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.8rem;">AGB</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal für Impressum / Datenschutz / AGB -->
+    <div id="legalModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-light); padding-bottom:0.85rem; margin-bottom:1rem;">
+                <h3 id="modalTitle" style="font-size:1.2rem; font-weight:800;">Rechtliche Angaben</h3>
+                <button onclick="closeLegalModal()" aria-label="Schließen" style="background:#f1f5f9; border:none; width:2rem; height:2rem; border-radius:999px; cursor:pointer; font-weight:700;">✕</button>
+            </div>
+            <div id="modalBody" style="font-size:0.84rem; color:var(--text-muted); line-height:1.6;"></div>
+        </div>
+    </div>
+
+    <script>
+        /* =====================================================================================
+           SITE – ALLE ANGABEN, DIE SIE SPÄTER ANPASSEN MÜSSEN, STEHEN HIER AN EINER STELLE.
+           Werte in {{doppelten geschweiften Klammern}} sind noch nicht ersetzt; sie werden auf der Seite
+           gelb markiert. Bitte ersetzen Sie sie durch Ihre echten Angaben (ohne die Klammern).
+           ===================================================================================== */
+        const SITE = {
+            // --- Impressum (§ 5 DDG) ---
+            firma: "{{FIRMENNAME_PLATZHALTER}}",
+            strasse: "{{STRASSE_HAUSNUMMER}}",
+            ort: "{{PLZ_ORT}}",
+            vertreter: "{{VERTRETUNGSBERECHTIGTER_NAME}}",
+            telefon: "{{TELEFONNUMMER}}",
+            email: "{{EMAIL_ADRESSE}}",
+            ustId: "{{UST_ID}}",
+            registergericht: "",   // optional, z. B. "Amtsgericht München" – leer lassen = Zeile entfällt
+            registernummer: "",    // optional, z. B. "HRB 123456"
+
+            // --- Datenschutz ---
+            webhosting: "{{WEBHOSTING_ANBIETER}}",     // wer diese Webseite ausliefert, z. B. "GitHub Pages (GitHub Inc., USA)"
+            serverStandort: "{{HOSTING_DETAILS}}",     // wo der TaktWerk-Server steht, z. B. "eigener Server in Deutschland"
+            verbindungsdienst: "Tailscale, Inc. (USA)", // Dienst, der die Verbindung zum TaktWerk-Server vermittelt; leer lassen, wenn keiner genutzt wird
+
+            // --- Preis (erscheint in FAQ und Kontaktbereich) ---
+            preis: "{{PREIS_RICHTWERT}}", // z. B. "Richtwert ab 39 € pro Monteur und Monat" oder "Preis auf Anfrage"
+
+            // --- TaktWerk-Server (Formular und Demo) ---
+            appUrl: "https://taktwerk.tail679420.ts.net", // Adresse Ihrer TaktWerk-Installation, ohne "/" am Ende
+            demoAktiv: true,                              // false = "Live-Demo"-Knöpfe ausblenden (z. B. wenn DEMO_ENABLED=false)
+
+            // --- AGB (optional): leer lassen, dann wird der AGB-Link ausgeblendet ---
+            agbText: ""
+        };
+
+        const isPlaceholder = (v) => typeof v === "string" && /\{\{.*\}\}/.test(v);
+        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+        /* Wert für die Anzeige: nicht ersetzte Platzhalter werden gelb markiert */
+        const show = (v) => (isPlaceholder(v) ? '<span class="ph">' + esc(v) + "</span>" : esc(v));
+
+        function fillSite() {
+            document.querySelectorAll("[data-site]").forEach((el) => { el.innerHTML = show(SITE[el.dataset.site] ?? ""); });
+            const tel = document.querySelector("[data-site-tel]");
+            if (tel) tel.href = "tel:" + SITE.telefon.replace(/[^\d+]/g, "");
+            // Demo-Knöpfe nur zeigen, wenn eine Demo angeboten wird
+            document.querySelectorAll("[data-demo]").forEach((a) => {
+                if (SITE.demoAktiv && SITE.appUrl) { a.href = SITE.appUrl + "/demo"; a.classList.remove("hidden"); }
+            });
+            if (SITE.agbText) document.getElementById("agbBtn").classList.remove("hidden");
+            document.getElementById("year").textContent = new Date().getFullYear();
+        }
+
+        function switchProofTab(tab) {
+            const office = document.getElementById("tabContentOffice");
+            const pdf = document.getElementById("tabContentPdf");
+            const bOffice = document.getElementById("btnViewOffice");
+            const bPdf = document.getElementById("btnViewPdf");
+            const isOffice = tab === "office";
+            office.classList.toggle("hidden", !isOffice);
+            pdf.classList.toggle("hidden", isOffice);
+            bOffice.classList.toggle("active", isOffice);
+            bPdf.classList.toggle("active", !isOffice);
+            bOffice.setAttribute("aria-selected", String(isOffice));
+            bPdf.setAttribute("aria-selected", String(!isOffice));
+        }
+
+        function updateROI() {
+            const m = parseFloat(document.getElementById("monteurSlider").value);
+            const h = parseFloat(document.getElementById("hoursSlider").value);
+            const r = parseFloat(document.getElementById("rateSlider").value);
+
+            document.getElementById("monteurVal").innerText = m + (m === 1 ? " Monteur" : " Monteure");
+            document.getElementById("hoursVal").innerText = h.toLocaleString("de-DE") + " Std. / Woche je Monteur";
+            document.getElementById("rateVal").innerText = r + " € / Std.";
+
+            const monthlyHours = m * h * 4;
+            const monthlyVal = monthlyHours * r;
+            document.getElementById("resHours").innerText = monthlyHours.toLocaleString("de-DE", { minimumFractionDigits: 1 }) + " Std.";
+            document.getElementById("resValue").innerText = Math.round(monthlyVal).toLocaleString("de-DE") + " €";
+        }
+
+        /* ---------------------------------- Rechtstexte ---------------------------------- */
+        function legalTexts() {
+            const anschrift = show(SITE.firma) + "<br>" + show(SITE.strasse) + "<br>" + show(SITE.ort);
+            const register = SITE.registergericht || SITE.registernummer
+                ? "<p><strong>Registereintrag:</strong> " + show(SITE.registergericht) + " " + show(SITE.registernummer) + "</p>"
+                : "";
+            const verbindung = SITE.verbindungsdienst
+                ? " Zur Erreichbarkeit unseres Servers wird ein Verbindungsdienst (" + show(SITE.verbindungsdienst) + ") eingesetzt, der die verschlüsselte Verbindung vermittelt; die Inhalte sind dabei Ende-zu-Ende per HTTPS geschützt."
+                : "";
+            const appDatenschutz = SITE.appUrl
+                ? '<p>Die Datenschutzerklärung der Anwendung selbst finden Sie unter <a class="linkbtn" href="' + esc(SITE.appUrl) + '/datenschutz" target="_blank" rel="noopener">' + esc(SITE.appUrl) + "/datenschutz</a>.</p>"
+                : "";
+            return {
+                impressum:
+                    "<p><strong>Angaben gemäß § 5 DDG:</strong><br>" + anschrift + "</p>" +
+                    "<p><strong>Vertreten durch:</strong> " + show(SITE.vertreter) + "</p>" +
+                    "<p><strong>Kontakt:</strong> Telefon: " + show(SITE.telefon) + " · E-Mail: " + show(SITE.email) + "</p>" +
+                    register +
+                    "<p><strong>Umsatzsteuer-ID:</strong> " + show(SITE.ustId) + "</p>",
+                datenschutz:
+                    "<p><strong>1. Verantwortlicher</strong><br>" + anschrift + "<br>E-Mail: " + show(SITE.email) + " · Telefon: " + show(SITE.telefon) + "</p>" +
+                    "<p><strong>2. Aufruf dieser Webseite</strong><br>Diese Seite wird von " + show(SITE.webhosting) + " ausgeliefert. Beim Aufruf verarbeitet der Hoster technisch notwendige Verbindungsdaten (u. a. IP-Adresse, Zeitpunkt) in Server-Logdateien. Diese Webseite bindet keine externen Schriftarten, Icon-Dienste, Tracking- oder Analysewerkzeuge von Drittservern ein und setzt keine Cookies.</p>" +
+                    "<p><strong>3. Kontaktformular (Testzugang / Rückruf)</strong><br>" +
+                    "Wenn Sie das Formular absenden, verarbeiten wir die von Ihnen eingegebenen Daten: Name, Betrieb, optional Anzahl der Monteure und Nachricht sowie Ihre Telefonnummer oder E-Mail-Adresse.<br>" +
+                    "<em>Zweck:</em> Bearbeitung Ihrer Anfrage und Kontaktaufnahme. <em>Rechtsgrundlage:</em> Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) bzw. vorvertragliche Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).<br>" +
+                    "<em>Empfänger:</em> Die Daten werden verschlüsselt an unseren Server (" + show(SITE.serverStandort) + ") übertragen und dort gespeichert; wir erhalten eine Benachrichtigung per E-Mail." + verbindung + "<br>" +
+                    "<em>Speicherdauer:</em> Ihre Anfrage wird spätestens nach 180 Tagen automatisch gelöscht, sofern kein Vertrag zustande kommt. Die Angabe der Daten ist freiwillig; ohne sie können wir Ihre Anfrage aber nicht bearbeiten. Eine Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (E-Mail genügt).</p>" +
+                    "<p><strong>4. Die Anwendung „TaktWerk“</strong><br>Bei der Nutzung der Anwendung durch Handwerksbetriebe werden je nach Kanal Auftragsverarbeiter eingesetzt: für Hosting (" + show(SITE.serverStandort) + "), für Sprach- und Textverarbeitung (KI-Dienste, teils mit Verarbeitung in den USA auf Grundlage der EU-Standardvertragsklauseln bzw. des EU-US Data Privacy Frameworks) und – optional – für den WhatsApp-Kanal (Meta Platforms Ireland Ltd.). Private Nachrichten werden nach der automatischen Einstufung nicht gespeichert.</p>" + appDatenschutz +
+                    "<p><strong>5. Ihre Rechte</strong><br>Sie haben das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Kontakt: " + show(SITE.email) + ".</p>",
+                agb: SITE.agbText ? "<p>" + esc(SITE.agbText) + "</p>" : ""
+            };
+        }
+
+        function openLegalModal(type) {
+            const titles = { impressum: "Impressum", datenschutz: "Datenschutzhinweise", agb: "AGB" };
+            document.getElementById("modalTitle").innerText = titles[type];
+            document.getElementById("modalBody").innerHTML = legalTexts()[type];
+            document.getElementById("legalModal").classList.add("open");
+        }
+        function closeLegalModal() { document.getElementById("legalModal").classList.remove("open"); }
+        document.getElementById("legalModal").addEventListener("click", (e) => { if (e.target.id === "legalModal") closeLegalModal(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLegalModal(); });
+
+        /* ---------------------------------- Kontaktformular ---------------------------------- */
+        document.getElementById("leadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const err = document.getElementById("formError");
+            const btn = document.getElementById("fSubmit");
+            err.classList.add("hidden");
+
+            const val = (id) => document.getElementById(id).value.trim();
+            if (val("fName").length < 2 || val("fCompany").length < 2 || val("fContact").length < 5) {
+                err.textContent = "Bitte Name, Betrieb und eine Telefonnummer oder E-Mail-Adresse angeben.";
+                err.classList.remove("hidden");
+                return;
+            }
+            if (!document.getElementById("fConsent").checked) {
+                err.textContent = "Bitte bestätigen Sie den Hinweis zum Datenschutz.";
+                err.classList.remove("hidden");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = "Wird gesendet …";
+            try {
+                const res = await fetch(SITE.appUrl + "/api/leads", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: val("fName"),
+                        company: val("fCompany"),
+                        teamSize: val("fSize") || null,
+                        contact: val("fContact"),
+                        message: val("fMessage") || null,
+                        consent: true,
+                        website: document.getElementById("fWebsite").value,
+                    }),
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    throw new Error(res.status === 429
+                        ? "Es wurden gerade sehr viele Anfragen gesendet. Bitte versuchen Sie es in einer Stunde erneut oder rufen Sie uns an."
+                        : (data.error || "Das hat leider nicht geklappt. Bitte rufen Sie uns kurz an."));
+                }
+                // Erfolg erst jetzt anzeigen – der Server hat die Anfrage wirklich gespeichert
+                document.querySelectorAll("#leadForm > *").forEach((el) => el.classList.add("hidden"));
+                document.getElementById("formSuccess").classList.remove("hidden");
+            } catch (ex) {
+                err.textContent = ex.message && ex.message !== "Failed to fetch" ? ex.message : "Keine Verbindung zum Server. Bitte versuchen Sie es später erneut oder rufen Sie uns an.";
+                err.classList.remove("hidden");
+                btn.disabled = false;
+                btn.textContent = "Anfrage absenden";
+            }
+        });
+
+        fillSite();
+        updateROI();
+    </script>
+</body>
+</html>
